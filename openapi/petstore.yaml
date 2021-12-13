@@ -351,6 +351,7 @@ components:
           description: This is the last name of the shopper
         dateOfBirth: 
           type: string
+          minimum: 10
           maximum: 10
           format: date
           description: This is the date of birth of the shopper. Format [YYYY-MM-DD]

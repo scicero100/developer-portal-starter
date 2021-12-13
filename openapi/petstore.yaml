@@ -154,11 +154,11 @@ paths:
                   $ref: "#/components/schemas/Shopper"
       responses:
         200:
-          description: Cage Withdrawal Approved
+          description: Cage Voucher
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/TransactionResponse"               
+                 $ref: "#/components/schemas/VoucherResponse"               
         default:
           description: Error
           content:
@@ -443,4 +443,15 @@ components:
           example: "Approved"
         stateMessage:
           type: string
-          example: "Approved"          
+          example: "Approved"    
+    VoucherResponse:
+      required:
+        - state
+        - stateMessage
+      properties:
+        state:
+          type: string
+          example: "VoucherCreated"
+        stateMessage:
+          type: string
+          example: "Voucher Created" 

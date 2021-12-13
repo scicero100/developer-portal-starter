@@ -54,13 +54,19 @@ paths:
                     stateMessage: "Voucher Created"
                     amount: 30.33
                     currency: USD
+                    shopper:
+                        $ref: "#/components/schemas/VoucherShopper"
                 Voucher Paid:
                   value: 
                     voucherNumber: "1234567890"
                     state: "VoucherPaid"
                     stateMessage: "Voucher Paid"
                     amount: 30.33
-                    currency: USD       
+                    currency: USD
+                    paymentTypeAmounts:
+                        $ref: "#/components/schemas/PaymentTypeAmounts"
+                    shopper:
+                        $ref: "#/components/schemas/VoucherShopper"                    
                 Voucher Expired:
                   value: 
                     voucherNumber: "1234567890"
@@ -68,6 +74,8 @@ paths:
                     stateMessage: "Voucher Expired"
                     amount: 30.33
                     currency: USD
+                    shopper:
+                        $ref: "#/components/schemas/VoucherShopper"                    
     post:
       summary: Create a Cage Voucher
       operationId: createVoucher
@@ -355,6 +363,46 @@ components:
           maximum: 10
           format: date
           description: This is the date of birth of the shopper. Format [YYYY-MM-DD]
+    VoucherShopper:
+      required:
+        - id
+        - username
+        - firstName
+        - lastName
+        - dateOfBirth
+        - email
+      properties:
+        id:
+          type: string          
+          description: This is the unique identifier of the shopper
+          example: 1ed768bb-e88a-4636-91ae-67927ccbb02b          
+          maximum: 100
+        username:
+          type: string          
+          description: This is the unique username of the shopper
+          example: 1ed768bb-e88a-4636-91ae-67927ccbb02b          
+          maximum: 100          
+        firstName:
+          type: string
+          description: This is the first name of the shopper
+          example: John          
+          maximum: 100
+        lastName:
+          type: string
+          maximum: 100
+          example: Doe
+          description: This is the last name of the shopper
+        dateOfBirth: 
+          type: string
+          minimum: 10
+          maximum: 10
+          format: date
+          description: This is the date of birth of the shopper. Format [YYYY-MM-DD]          
+        email:
+          type: string
+          maximum: 100
+          example: john.doe@pxpfinancial.com
+          description: This is the email address of the shopper          
     Error:
       required:
         - code

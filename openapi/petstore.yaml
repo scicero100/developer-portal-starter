@@ -51,7 +51,7 @@ paths:
           schema:
             type: string
             maxLength: 50
-            example: "1234657890"
+            example: "141414"
       responses:
         200:
           description: An array of vouchers

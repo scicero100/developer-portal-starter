@@ -50,8 +50,8 @@ paths:
           required: true
           schema:
             type: string
-            maxLength: 50
-            example: "141414"
+            maxLength: 20
+            example: "1234567890"
       responses:
         200:
           description: An array of vouchers

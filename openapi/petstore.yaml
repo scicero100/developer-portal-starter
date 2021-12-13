@@ -193,6 +193,7 @@ paths:
                     id:
                       type: string
                       example: "test_shopper_01"
+                      maximum: 50
                 paymentTypeAmounts:
                   $ref: "#/components/schemas/PaymentTypeAmounts"
       responses:

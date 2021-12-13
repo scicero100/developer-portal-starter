@@ -154,7 +154,7 @@ paths:
                   $ref: "#/components/schemas/Shopper"
       responses:
         200:
-          description: Cage Voucher
+          description: Voucher Created
           content:
             application/json:
               schema:

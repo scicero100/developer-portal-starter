@@ -158,17 +158,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  systemTransactionId:
-                    type: string
-                    example: "57bc8107-0482-488d-8c0c-5021042124f2"
-                  state:
-                    type: string
-                    example: "Approved"
-                  stateMessage:
-                    type: string
-                    example: "Approved"                 
+                 $ref: "#/components/schemas/TransactionResponse"               
         default:
           description: Error
           content:
@@ -245,17 +235,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  systemTransactionId:
-                    type: string
-                    example: "57bc8107-0482-488d-8c0c-5021042124f2"
-                  state:
-                    type: string
-                    example: "Approved"
-                  stateMessage:
-                    type: string
-                    example: "Approved"                    
+                 $ref: "#/components/schemas/TransactionResponse"                  
         default:
           description: Error
           content:
@@ -315,17 +295,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:   
-                  systemTransactionId:
-                    type: string
-                    example: "57bc8107-0482-488d-8c0c-5021042124f2"
-                  state:
-                    type: string
-                    example: "Approved"
-                  stateMessage:
-                    type: string
-                    example: "Approved"                    
+                $ref: "#/components/schemas/TransactionResponse"
         default:
           description: Error
           content:
@@ -456,3 +426,21 @@ components:
         details:
           type: array  
           items: {}
+    TransactionResponse:
+      required:
+        - systemTransactionId
+        - state
+        - stateMessage
+      properties:
+        systemTransactionId:
+          type: string
+          example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+          minimum: 36
+          maximum: 36          
+        state:
+          type: string
+          example: "Approved"
+        stateMessage:
+          type: string
+          example: "Approved"          

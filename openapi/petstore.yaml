@@ -46,6 +46,27 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - voucherNumber
+                  - state
+                  - stateMessage
+                  - amount
+                  - currency
+                properties:
+                  voucherNumber: 
+                    type: string
+                  state: 
+                    type: string  
+                  stateMessage: 
+                    type: string  
+                  amount: 
+                    type: number
+                  currency: 
+                    type: string
+                  paymentTypeAmounts:
+                    $ref: "#/components/schemas/PaymentTypeAmounts"                    
+                  shopper:
+                    $ref: "#/components/schemas/ShopperVoucher"
               examples: 
                 Voucher Created:
                   value: 
@@ -55,7 +76,12 @@ paths:
                     amount: 30.33
                     currency: USD
                     shopper:
-                        $ref: "#/components/schemas/VoucherShopper"
+                      id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                      username: "JDoe"
+                      firstName: "John"
+                      lastName: "Doe"
+                      dateOfBirth: "1982-07-12"
+                      email: "john.doe@pxpfinancial.com"
                 Voucher Paid:
                   value: 
                     voucherNumber: "1234567890"
@@ -64,9 +90,17 @@ paths:
                     amount: 30.33
                     currency: USD
                     paymentTypeAmounts:
-                        $ref: "#/components/schemas/PaymentTypeAmounts"
+                      cash: 10.2
+                      cheque: 20.1
+                      chips: 0
+                      other: 0
                     shopper:
-                        $ref: "#/components/schemas/VoucherShopper"                    
+                      id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                      username: "JDoe"
+                      firstName: "John"
+                      lastName: "Doe"
+                      dateOfBirth: "1982-07-12"
+                      email: "john.doe@pxpfinancial.com"
                 Voucher Expired:
                   value: 
                     voucherNumber: "1234567890"
@@ -75,7 +109,12 @@ paths:
                     amount: 30.33
                     currency: USD
                     shopper:
-                        $ref: "#/components/schemas/VoucherShopper"                    
+                      id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                      username: "JDoe"
+                      firstName: "John"
+                      lastName: "Doe"
+                      dateOfBirth: "1982-07-12"
+                      email: "john.doe@pxpfinancial.com"                   
     post:
       summary: Create a Cage Voucher
       operationId: createVoucher

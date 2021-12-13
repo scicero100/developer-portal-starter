@@ -426,6 +426,17 @@ components:
         details:
           type: array  
           items: {}
+    VoucherResponse:
+      required:
+        - state
+        - stateMessage
+      properties:
+        state:
+          type: string
+          example: "VoucherCreated"
+        stateMessage:
+          type: string
+          example: "Voucher Created"          
     TransactionResponse:
       required:
         - systemTransactionId
@@ -443,15 +454,4 @@ components:
           example: "Approved"
         stateMessage:
           type: string
-          example: "Approved"    
-    VoucherResponse:
-      required:
-        - state
-        - stateMessage
-      properties:
-        state:
-          type: string
-          example: "VoucherCreated"
-        stateMessage:
-          type: string
-          example: "Voucher Created" 
+          example: "Approved" 

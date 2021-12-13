@@ -42,7 +42,7 @@ paths:
           required: true
           schema:
             type: string
-            maxLength: 50
+            maxLength: 10
             example: "ACM-00000001"
         - name: voucherNumber
           in: query

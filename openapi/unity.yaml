@@ -378,6 +378,7 @@ components:
           example: 0
           description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
     shopper:
+      description: "This is the details of the shopper"
       required:
         - id
         - firstName

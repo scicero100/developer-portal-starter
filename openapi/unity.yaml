@@ -68,7 +68,7 @@ paths:
                   details:
                     type: array
                     items: {}
-                    example: "'$.voucherNumber' - The voucherNumber field is required"                    
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                    
     get:
       summary: Get Cage Voucher
       operationId: getVoucher
@@ -196,7 +196,7 @@ paths:
                   details:
                     type: array
                     items: {}
-                    example: "'$.voucherNumber' - The voucherNumber field is required"         
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                           
   /withdrawals:
     post:
       summary: Create a Cage Withdrawal
@@ -249,7 +249,7 @@ paths:
                   details:
                     type: array
                     items: {}
-                    example: "'$.voucherNumber' - The voucherNumber field is required" 
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                    
   /merchants:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1

@@ -51,14 +51,18 @@ paths:
                 properties:
                   voucherNumber: 
                     type: string
+                    example: "1234567890"
                   state: 
-                    type: string  
+                    $ref: "#/components/schemas/VoucherState" 
                   stateMessage: 
                     type: string  
+                    example: "Voucher Created"
                   amount: 
                     type: number
+                    example: 33.33
                   currency: 
                     type: string
+                    example: "EUR"
                   paymentTypeAmounts:
                     $ref: "#/components/schemas/PaymentTypeAmounts"                    
                   shopper:
@@ -511,6 +515,16 @@ components:
         stateMessage:
           type: string
           example: "Approved" 
+    VoucherState:
+      required:
+        - state
+      properties:
+        state:
+          type: string
+          enum: 
+            - voucherCreated
+            - voucherPaid
+            - voucherExpired
     Merchant:
       required:
         - id

@@ -489,9 +489,11 @@ components:
           example: "VoucherCreated"
           enum:
             - VoucherCreated
+          description: "This is the result of the Voucher Creation"
         stateMessage:
           type: string
-          example: "Voucher Created"      
+          example: "Voucher Created"
+          description: "This is the result message of the Voucher Creation"
     TransactionResponse:
       required:
         - systemTransactionId

@@ -42,12 +42,6 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - voucherNumber
-                  - state
-                  - stateMessage
-                  - amount
-                  - currency
                 properties:
                   voucherNumber: 
                     $ref: "#/paramters/voucherNumber"
@@ -271,10 +265,6 @@ paths:
           application/json:
             schema:
               type: object 
-              required:
-                - site
-                - voucherNumber
-                - paymentTypeAmounts
               properties:
                 site:
                   $ref: "#/parameters/site"

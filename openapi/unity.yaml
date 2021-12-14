@@ -251,6 +251,8 @@ paths:
                     items: {}
                     example: "'$.voucherNumber' - The voucherNumber field is required" 
   /merchants:
+    servers:
+      - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
       summary: List all merchants
       operationId: listMerchants
@@ -275,6 +277,8 @@ paths:
                 items: 
                   $ref: "#/components/schemas/merchant"   
   /sites:
+    servers:
+      - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
       summary: List all sites
       operationId: listSites

@@ -51,8 +51,7 @@ paths:
                       amount: 30.33
                       currency: USD
                       shopper:
-                        id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                        username: "JDoe"
+                        id: "shopper_01"
                         firstName: "John"
                         lastName: "Doe"
                         dateOfBirth: "1982-07-12"
@@ -70,8 +69,7 @@ paths:
                         chips: 0
                         other: 0
                       shopper:
-                        id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                        username: "JDoe"
+                        id: "shopper_01"
                         firstName: "John"
                         lastName: "Doe"
                         dateOfBirth: "1982-07-12"
@@ -84,12 +82,11 @@ paths:
                       amount: 30.33
                       currency: USD
                       shopper:
-                        id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                        username: "JDoe"
+                        id: "shopper_01"
                         firstName: "John"
                         lastName: "Doe"
                         dateOfBirth: "1982-07-12"
-                        email: "john.doe@pxpfinancial.com"                  
+                        email: "john.doe@pxpfinancial.com"
     post:
       summary: Create a Cage Voucher
       operationId: createVoucher
@@ -386,6 +383,7 @@ components:
         - firstName
         - lastName
         - dateOfBirth
+        - email
       properties:
         id:
           type: string
@@ -409,6 +407,12 @@ components:
           maximum: 10
           format: date
           description: This is the date of birth of the shopper. Format [YYYY-MM-DD]
+        email: 
+          type: string
+          maximum: 100
+          format: email
+          description: This is the email address of the shopper
+          email: "john.doe@pxpfinancial.com"
     voucherResponse:
       required:
         - voucherNumber

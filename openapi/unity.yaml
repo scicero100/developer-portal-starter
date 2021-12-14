@@ -171,7 +171,7 @@ paths:
                   properties:
                     id:
                       type: string
-                      example: "test_shopper_01"
+                      example: "Shopper_01"
                       maximum: 50
                 paymentTypeAmounts:
                   $ref: "#/components/schemas/PaymentTypeAmounts"
@@ -354,6 +354,7 @@ components:
           type: array  
           items: {}  
     PaymentTypeAmounts:
+      description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"
       required:
         - cash
         - chip
@@ -363,15 +364,19 @@ components:
         cash:
           type: number
           example: 10.11
+          description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
         chip:
           type: number
           example: 10.11
+          description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
         cheque:
           type: number
           example: 10.11
+          description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
         other: 
           type: number
           example: 0
+          description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
     Shopper:
       required:
         - id
@@ -382,8 +387,8 @@ components:
         id:
           type: string          
           description: This is the unique identifier of the shopper
-          example: 1ed768bb-e88a-4636-91ae-67927ccbb02b          
-          maximum: 100
+          example: "Shopper_01"
+          maximum: 50
         firstName:
           type: string
           description: This is the first name of the shopper

@@ -5,12 +5,12 @@ training:
     pages:
       - label: Setup
         page: developer-portal/setup.md
-  - group: Unity (Internal Services) reference
+  - group: Standards
     expanded: false
     pages:
       - label: Setup
         page: developer-portal/setup.md
-  - group: Unity (Internal Services) reference
+  - group: Reference
     expanded: false
     pages:
       - page: openapi/reference.page.yaml/*

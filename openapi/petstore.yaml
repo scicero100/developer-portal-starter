@@ -349,10 +349,13 @@ paths:
                 properties:
                   id: 
                     type: string
+                    example: "MERCHANT_ACCOUNT_1"
                   name: 
                     type: string  
+                    example: "Merchant Account 1"
                   merchantCategoryCode: 
                     type: string  
+                    example: "5541"
                   address: 
                     $ref: "#/components/schemas/Address"
   /sites:

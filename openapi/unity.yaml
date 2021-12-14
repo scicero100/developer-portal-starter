@@ -13,6 +13,59 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
   /vouchers: 
+    post:
+      summary: Create a Cage Voucher
+      operationId: createVoucher
+      tags:
+        - Cage Transactions   
+      requestBody:
+        description: Create a Cage Voucher
+        required: true      
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site:
+                  $ref: "#/components/schemas/site"
+                voucherNumber:
+                  $ref: "#/components/schemas/voucherNumber"
+                amount:
+                  $ref: "#/components/schemas/amount"               
+                currency:
+                  $ref: "#/components/schemas/currency"
+                shopper:
+                  $ref: "#/components/schemas/shopper"
+      responses:
+        200:
+          description: Voucher Created
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/createVoucherResponse"               
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        400:
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  code:
+                    type: string                
+                    example: "INVALID_REQUEST"
+                  reason:
+                    type: string                
+                    example: "One or more validation errors occurred"
+                  details:
+                    type: array
+                    items: {}
+                    example: "'$.voucherNumber' - The voucherNumber field is required"                    
     get:
       summary: Get Cage Voucher
       operationId: getVoucher
@@ -86,60 +139,7 @@ paths:
                         firstName: "John"
                         lastName: "Doe"
                         dateOfBirth: "1982-07-12"
-                        email: "john.doe@pxpfinancial.com"
-    post:
-      summary: Create a Cage Voucher
-      operationId: createVoucher
-      tags:
-        - Cage Transactions   
-      requestBody:
-        description: Create a Cage Voucher
-        required: true      
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                site:
-                  $ref: "#/components/schemas/site"
-                voucherNumber:
-                  $ref: "#/components/schemas/voucherNumber"
-                amount:
-                  $ref: "#/components/schemas/amount"               
-                currency:
-                  $ref: "#/components/schemas/currency"
-                shopper:
-                  $ref: "#/components/schemas/shopper"
-      responses:
-        200:
-          description: Voucher Created
-          content:
-            application/json:
-              schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:   
-                  code:
-                    type: string                
-                    example: "INVALID_REQUEST"
-                  reason:
-                    type: string                
-                    example: "One or more validation errors occurred"
-                  details:
-                    type: array
-                    items: {}
-                    example: "'$.voucherNumber' - The voucherNumber field is required"                    
+                        email: "john.doe@pxpfinancial.com"                    
   /deposits:  
     post:
       summary: Create a Cage Deposit

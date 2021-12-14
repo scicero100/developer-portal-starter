@@ -557,24 +557,30 @@ components:
         street:
           type: string
           example: "Street Name"
+          description: "The street name of the merchant"
           maximum: 100         
         houseNoName:
           type: string
           example: "House Name"
+          description: "The house name or number of the merchant"
           maximum: 100  
         postalCode:
           type: string
           example: "Postal Code"
+          description: "The postal code of the merchant"
           maximum: 100
         city:
           type: string
           example: "City"
+          description: "The city of the merchant"
           maximum: 100  
         state:
           type: string
           example: "State"
+          description: "The state of the merchant"
           maximum: 100
         country:
           type: string
           example: "Country"
+          description: "The country of the merchant"
           maximum: 100            

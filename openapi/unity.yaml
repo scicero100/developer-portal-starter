@@ -491,6 +491,17 @@ components:
           maximum: 100
           example: john.doe@pxpfinancial.com
           description: This is the email address of the shopper          
+    VoucherResponse:
+      required:
+        - state
+        - stateMessage
+      properties:
+        state:
+          type: string
+          example: "voucherCreated"
+        stateMessage:
+          type: string
+          example: "Voucher Created"      
     TransactionResponse:
       required:
         - systemTransactionId

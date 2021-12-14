@@ -392,10 +392,13 @@ paths:
                 properties:
                   id: 
                     type: string
+                    example: "SITE_1"
                   name: 
                     type: string  
+                    example: "Site 1"
                   merchantId: 
                     type: string  
+                    example: "MERCHANT_ACCOUNT_1"
 components:
   schemas:
     PaymentTypeAmounts:

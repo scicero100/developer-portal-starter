@@ -44,7 +44,7 @@ paths:
                 type: object
                 properties:
                   voucherNumber: 
-                    $ref: "#/paramters/voucherNumber"
+                    $ref: "#/parameters/voucherNumber"
                   state: 
                     type: string
                     enum:
@@ -124,6 +124,10 @@ paths:
             schema:
               type: object
               required:
+                - site
+                - voucherNumber
+                - amount
+                - currency
                 - shopper
               properties:
                 site:
@@ -251,7 +255,7 @@ paths:
                 site:
                   $ref: "#/parameters/site"
                 voucherNumber:
-                  $ref: "#/paramters/voucherNumber"
+                  $ref: "#/parameters/voucherNumber"
                 paymentTypeAmounts:
                   $ref: "#/components/schemas/PaymentTypeAmounts"
       responses:

@@ -334,7 +334,7 @@ components:
       maximum: 3
       example: "EUR"  
     shopperId:
-      type: object 
+      type: string 
       required:
         - id
       description: This is the unique identifier of the shopper

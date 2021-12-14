@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/VoucherResponse"
+                 $ref: "#/components/schemas/voucherResponse"
               examples: 
                   Voucher Created:
                     value: 
@@ -112,20 +112,20 @@ paths:
                 currency:
                   $ref: "#/components/schemas/currency"
                 shopper:
-                  $ref: "#/components/schemas/Shopper"
+                  $ref: "#/components/schemas/shopper"
       responses:
         200:
           description: Voucher Created
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/CreateVoucherResponse"               
+                 $ref: "#/components/schemas/createVoucherResponse"               
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/error"
         400:
           description: Invalid Request
           content:
@@ -164,30 +164,22 @@ paths:
                 currency:
                   $ref: "#/components/schemas/currency"
                 shopper:
-                  type: object 
-                  required:
-                    - id
-                  description: This is the unique identifier of the shopper
-                  properties:
-                    id:
-                      type: string
-                      example: "Shopper_01"
-                      maximum: 50
+                  $ref: "#/components/schemas/shopperId"
                 paymentTypeAmounts:
-                  $ref: "#/components/schemas/PaymentTypeAmounts"
+                  $ref: "#/components/schemas/paymentTypeAmounts"
       responses:
         200:
           description: Cage Deposit Approved
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/TransactionResponse"                  
+                 $ref: "#/components/schemas/transactionResponse"                  
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/error"
         400:
           description: Invalid Request
           content:
@@ -224,20 +216,20 @@ paths:
                 voucherNumber:
                   $ref: "#/components/schemas/voucherNumber"
                 paymentTypeAmounts:
-                  $ref: "#/components/schemas/PaymentTypeAmounts"
+                  $ref: "#/components/schemas/paymentTypeAmounts"
       responses:
         200:
           description: Cage Withdrawal Approved
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TransactionResponse"
+                $ref: "#/components/schemas/transactionResponse"
         default:
           description: Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/error"
         400:
           description: Invalid Request
           content:
@@ -278,7 +270,7 @@ paths:
               schema:
                 type: array
                 items: 
-                    $ref: "#/components/schemas/Merchant"   
+                  $ref: "#/components/schemas/merchant"   
   /sites:
     get:
       summary: List all sites
@@ -310,7 +302,7 @@ paths:
               schema:
                 type: array
                 items:
-                   $ref: "#/components/schemas/Merchant"
+                   $ref: "#/components/schemas/merchant"
 components:
   schemas:
     site:
@@ -341,7 +333,18 @@ components:
       minimum: 3
       maximum: 3
       example: "EUR"  
-    Error:
+    shopperId:
+      type: object 
+      required:
+        - id
+      description: This is the unique identifier of the shopper
+      properties:
+        id:
+          type: string
+          pattern: '^[A-Za-z0-9 _-]'
+          example: "Shopper_01"
+          maximum: 50      
+    error:
       required:
         - code
         - reason
@@ -353,7 +356,7 @@ components:
         details:
           type: array  
           items: {}  
-    PaymentTypeAmounts:
+    paymentTypeAmounts:
       description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"
       required:
         - cash
@@ -377,7 +380,7 @@ components:
           type: number
           example: 0
           description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
-    Shopper:
+    shopper:
       required:
         - id
         - firstName
@@ -385,10 +388,7 @@ components:
         - dateOfBirth
       properties:
         id:
-          type: string          
-          description: This is the unique identifier of the shopper
-          example: "Shopper_01"
-          maximum: 50
+          $ref: "#/components/schemas/shopperId"
         firstName:
           type: string
           description: This is the first name of the shopper
@@ -405,7 +405,7 @@ components:
           maximum: 10
           format: date
           description: This is the date of birth of the shopper. Format [YYYY-MM-DD]
-    VoucherShopper:
+    voucherShopper:
       required:
         - id
         - username
@@ -415,12 +415,7 @@ components:
         - email
       properties:
         id:
-          type: string          
-          description: This is the unique identifier of the shopper
-          example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
-          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-          minimum: 36
-          maximum: 36
+          $ref: "#/components/schemas/shopperId"
         username:
           type: string          
           description: This is the unique username of the shopper
@@ -451,7 +446,7 @@ components:
           maximum: 100
           example: john.doe@pxpfinancial.com
           description: This is the email address of the shopper          
-    VoucherResponse:
+    voucherResponse:
       required:
         - voucherNumber
         - state
@@ -481,10 +476,10 @@ components:
         currency: 
           $ref: "#/components/schemas/currency"
         paymentTypeAmounts:
-          $ref: "#/components/schemas/PaymentTypeAmounts"                    
+          $ref: "#/components/schemas/paymentTypeAmounts"                    
         shopper:
-          $ref: "#/components/schemas/VoucherShopper"
-    CreateVoucherResponse:
+          $ref: "#/components/schemas/voucherShopper"
+    createVoucherResponse:
       required:
         - state
         - stateMessage
@@ -499,7 +494,7 @@ components:
           type: string
           example: "Voucher Created"
           description: "This is the result message of the Voucher Creation"
-    TransactionResponse:
+    transactionResponse:
       required:
         - systemTransactionId
         - state
@@ -522,7 +517,7 @@ components:
           type: string
           example: "Approved"
           description: This is the result message of the transaction
-    Merchant:
+    merchant:
       required:
         - id
         - name
@@ -546,9 +541,9 @@ components:
             maximum: 4
             description: The merchant category code assigned to the merchant
           address: 
-            $ref: "#/components/schemas/Address"
+            $ref: "#/components/schemas/address"
             description: The address of the merchant
-    Address:
+    address:
       required:
         - street
         - houseNoName

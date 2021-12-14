@@ -48,13 +48,13 @@ paths:
                   state: 
                     type: string
                     enum:
-                      - voucherCreated
-                      - voucherPaid
-                      - voucherExpired
-                    example: "voucherCreated"
+                      - VoucherCreated
+                      - VoucherPaid
+                      - VoucherExpired
+                    example: "VoucherCreated"
                   stateMessage: 
                     type: string
-                    example: "voucher Created"
+                    example: "Voucher Created"
                   amount: 
                     $ref: "#/components/schemas/amount"
                   currency: 
@@ -486,7 +486,9 @@ components:
       properties:
         state:
           type: string
-          example: "voucherCreated"
+          example: "VoucherCreated"
+          enum:
+            - VoucherCreated
         stateMessage:
           type: string
           example: "Voucher Created"      

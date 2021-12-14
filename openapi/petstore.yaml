@@ -393,12 +393,15 @@ paths:
                   id: 
                     type: string
                     example: "SITE_1"
+                    description: The unique id of the site associated with the merchant
                   name: 
                     type: string  
                     example: "Site 1"
+                    description: The site name associated with the merchant
                   merchantId: 
                     type: string  
                     example: "MERCHANT_ACCOUNT_1"
+                    description: The merchant id associated with the site
 components:
   schemas:
     PaymentTypeAmounts:

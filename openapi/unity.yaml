@@ -412,7 +412,7 @@ components:
           maximum: 100
           format: email
           description: This is the email address of the shopper
-          email: "john.doe@pxpfinancial.com"
+          example: "john.doe@pxpfinancial.com"
     voucherResponse:
       required:
         - voucherNumber

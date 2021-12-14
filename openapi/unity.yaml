@@ -5,7 +5,7 @@ info:
   description: >-
     This is an API reference for all internal Unity services
   version: 1.0.0
-  title: Unity Internal Services
+  title: Unity (Internal Services)
   contact:
     email: salvatore.cicero@pxpfinancial.com
   license:
@@ -37,80 +37,59 @@ paths:
             example: "1234567890"
       responses:
         200:
-          description: An array of vouchers
+          description: State of Voucher
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  voucherNumber: 
-                    $ref: "#/components/schemas/voucherNumber"
-                  state: 
-                    type: string
-                    enum:
-                      - VoucherCreated
-                      - VoucherPaid
-                      - VoucherExpired
-                    example: "VoucherCreated"
-                  stateMessage: 
-                    type: string
-                    example: "Voucher Created"
-                  amount: 
-                    $ref: "#/components/schemas/amount"
-                  currency: 
-                    $ref: "#/components/schemas/currency"
-                  paymentTypeAmounts:
-                    $ref: "#/components/schemas/PaymentTypeAmounts"                    
-                  shopper:
-                    $ref: "#/components/schemas/VoucherShopper"
+                 $ref: "#/components/schemas/VoucherResponse"
               examples: 
-                Voucher Created:
-                  value: 
-                    voucherNumber: "1234567890"
-                    state: "VoucherCreated"
-                    stateMessage: "Voucher Created"
-                    amount: 30.33
-                    currency: USD
-                    shopper:
-                      id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                      username: "JDoe"
-                      firstName: "John"
-                      lastName: "Doe"
-                      dateOfBirth: "1982-07-12"
-                      email: "john.doe@pxpfinancial.com"
-                Voucher Paid:
-                  value: 
-                    voucherNumber: "1234567890"
-                    state: "VoucherPaid"
-                    stateMessage: "Voucher Paid"
-                    amount: 30.33
-                    currency: USD
-                    paymentTypeAmounts:
-                      cash: 10.2
-                      cheque: 20.1
-                      chips: 0
-                      other: 0
-                    shopper:
-                      id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                      username: "JDoe"
-                      firstName: "John"
-                      lastName: "Doe"
-                      dateOfBirth: "1982-07-12"
-                      email: "john.doe@pxpfinancial.com"
-                Voucher Expired:
-                  value: 
-                    voucherNumber: "1234567890"
-                    state: "VoucherExpired"                   
-                    stateMessage: "Voucher Expired"
-                    amount: 30.33
-                    currency: USD
-                    shopper:
-                      id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                      username: "JDoe"
-                      firstName: "John"
-                      lastName: "Doe"
-                      dateOfBirth: "1982-07-12"
-                      email: "john.doe@pxpfinancial.com"                   
+                  Voucher Created:
+                    value: 
+                      voucherNumber: "1234567890"
+                      state: "VoucherCreated"
+                      stateMessage: "Voucher Created"
+                      amount: 30.33
+                      currency: USD
+                      shopper:
+                        id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                        username: "JDoe"
+                        firstName: "John"
+                        lastName: "Doe"
+                        dateOfBirth: "1982-07-12"
+                        email: "john.doe@pxpfinancial.com"
+                  Voucher Paid:
+                    value: 
+                      voucherNumber: "1234567890"
+                      state: "VoucherPaid"
+                      stateMessage: "Voucher Paid"
+                      amount: 30.33
+                      currency: USD
+                      paymentTypeAmounts:
+                        cash: 10.2
+                        cheque: 20.1
+                        chips: 0
+                        other: 0
+                      shopper:
+                        id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                        username: "JDoe"
+                        firstName: "John"
+                        lastName: "Doe"
+                        dateOfBirth: "1982-07-12"
+                        email: "john.doe@pxpfinancial.com"
+                  Voucher Expired:
+                    value: 
+                      voucherNumber: "1234567890"
+                      state: "VoucherExpired"                   
+                      stateMessage: "Voucher Expired"
+                      amount: 30.33
+                      currency: USD
+                      shopper:
+                        id: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                        username: "JDoe"
+                        firstName: "John"
+                        lastName: "Doe"
+                        dateOfBirth: "1982-07-12"
+                        email: "john.doe@pxpfinancial.com"                  
     post:
       summary: Create a Cage Voucher
       operationId: createVoucher
@@ -123,12 +102,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - site
-                - voucherNumber
-                - amount
-                - currency
-                - shopper
               properties:
                 site:
                   $ref: "#/components/schemas/site"
@@ -146,7 +119,7 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/VoucherResponse"               
+                 $ref: "#/components/schemas/CreateVoucherResponse"               
         default:
           description: Error
           content:
@@ -182,13 +155,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object 
-              required:
-                - site
-                - amount
-                - currency
-                - shopper
-                - paymentTypeAmounts
+              type: object
               properties:
                 site:
                   $ref: "#/components/schemas/site"
@@ -480,6 +447,39 @@ components:
           example: john.doe@pxpfinancial.com
           description: This is the email address of the shopper          
     VoucherResponse:
+      required:
+        - voucherNumber
+        - state
+        - stateMessage
+        - amount
+        - currency
+        - paymentTypeAmounts
+        - shopper
+      properties:
+        voucherNumber: 
+            $ref: "#/components/schemas/voucherNumber"
+            description: "This is the result of the Voucher Creation"
+            example: "VoucherCreated"
+        state: 
+            type: string
+            enum:
+              - VoucherCreated
+              - VoucherPaid
+              - VoucherExpired
+            example: "VoucherCreated"
+        stateMessage:
+          type: string
+          example: "Voucher Created"
+          description: "This is the result message of the Voucher Creation"          
+        amount: 
+          $ref: "#/components/schemas/amount"
+        currency: 
+          $ref: "#/components/schemas/currency"
+        paymentTypeAmounts:
+          $ref: "#/components/schemas/PaymentTypeAmounts"                    
+        shopper:
+          $ref: "#/components/schemas/VoucherShopper"
+    CreateVoucherResponse:
       required:
         - state
         - stateMessage

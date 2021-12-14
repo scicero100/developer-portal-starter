@@ -501,7 +501,8 @@ components:
           example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
           pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
           minimum: 36
-          maximum: 36          
+          maximum: 36  
+          description: This is the unique transaction id returned by Pxp Financial
         state:
           type: string
           example: "Approved"

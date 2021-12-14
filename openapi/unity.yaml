@@ -55,6 +55,9 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - code
+                  - reason
                 properties:   
                   code:
                     type: string                
@@ -233,7 +236,10 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:   
+                required:
+                  - code
+                  - reason                 
+                properties: 
                   code:
                     type: string                
                     example: "INVALID_REQUEST"

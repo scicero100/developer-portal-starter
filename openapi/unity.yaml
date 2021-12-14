@@ -124,10 +124,6 @@ paths:
             schema:
               type: object
               required:
-                - site
-                - voucherNumber
-                - amount
-                - currency
                 - shopper
               properties:
                 site:

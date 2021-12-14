@@ -506,9 +506,13 @@ components:
         state:
           type: string
           example: "Approved"
+          description: This is the result of the transaction
+          enum:
+            - Approved
         stateMessage:
           type: string
-          example: "Approved" 
+          example: "Approved"
+          description: This is the result message of the transaction
     Merchant:
       required:
         - id

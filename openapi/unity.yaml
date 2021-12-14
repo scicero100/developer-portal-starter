@@ -14,8 +14,8 @@ info:
 paths:
   /vouchers: 
     get:
-      summary: List all Cage Vouchers
-      operationId: listVouchers
+      summary: Get Cage Voucher
+      operationId: getVoucher
       tags:
         - Cage Transactions
       parameters:

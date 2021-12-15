@@ -275,7 +275,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: "#/components/schemas/merchant"   
+                  $ref: "#/components/schemas/merchants"   
   /sites:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1

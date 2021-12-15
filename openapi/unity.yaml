@@ -102,7 +102,7 @@ paths:
                   Voucher Created:
                     value: 
                       voucherNumber: "1234567890"
-                      state: "VoucherCreated"
+                      state: "created"
                       stateMessage: "Voucher Created"
                       amount: 30.33
                       currency: USD
@@ -115,15 +115,15 @@ paths:
                   Voucher Paid:
                     value: 
                       voucherNumber: "1234567890"
-                      state: "VoucherPaid"
+                      state: "paid"
                       stateMessage: "Voucher Paid"
                       amount: 30.33
                       currency: USD
                       paymentTypeAmounts:
-                        cash: 10.2
-                        cheque: 20.1
-                        chips: 0
-                        other: 0
+                        cash: 10.20
+                        cheque: 20.10
+                        chips: 0.00
+                        other: 0.00
                       shopper:
                         id: "shopper_01"
                         firstName: "John"
@@ -133,7 +133,7 @@ paths:
                   Voucher Expired:
                     value: 
                       voucherNumber: "1234567890"
-                      state: "VoucherExpired"                   
+                      state: "expired"                   
                       stateMessage: "Voucher Expired"
                       amount: 30.33
                       currency: USD
@@ -463,7 +463,7 @@ components:
           description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
         other: 
           type: number
-          example: 0
+          example: 0.00
           description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
     shopper:
       description: "This is the details of the shopper"
@@ -515,14 +515,14 @@ components:
         voucherNumber: 
             $ref: "#/components/schemas/voucherNumber"
             description: "This is the result of the Voucher Creation"
-            example: "VoucherCreated"
+            example: "created"
         state: 
             type: string
             enum:
-              - VoucherCreated
-              - VoucherPaid
-              - VoucherExpired
-            example: "VoucherCreated"
+              - created
+              - paid
+              - expired
+            example: "created"
         stateMessage:
           type: string
           example: "Voucher Created"
@@ -542,9 +542,9 @@ components:
       properties:
         state:
           type: string
-          example: "VoucherCreated"
+          example: "created"
           enum:
-            - VoucherCreated
+            - created
           description: "This is the result of the Voucher Creation"
         stateMessage:
           type: string

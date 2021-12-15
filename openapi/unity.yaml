@@ -665,10 +665,10 @@ components:
             maximum: 3
             description: The ISO 3166-1 alpha three code of the country
           countryNumericCode: 
-            type: number
+            type: string
             minimum: 3
             maximum: 3            
-            example: 826
+            example: "826"
             description: The ISO 3166-1 numeric code of the country
           countryName: 
             type: string  

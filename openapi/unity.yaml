@@ -371,23 +371,23 @@ paths:
       tags:
         - System Setup
       parameters:
-        - name: countryAlphaThreeCode
+        - name: threeLetterCode
           in: query
-          description: The ISO 3166-1 alpha three code of the country
+          description: The ISO 639-1 three letter language code
           schema:
             type: string
-            minLength: 2
-            maxLength: 2
-            example: "GBR"
+            minLength: 3
+            maxLength: 3
+            example: "eng"
       responses:
         200:
-          description: An array of countries
+          description: An array of languages
           content:
             application/json:
               schema:
                 type: array
                 items:
-                   $ref: "#/components/schemas/countries"                   
+                   $ref: "#/components/schemas/languages"                   
 components:
   schemas:
     site:
@@ -673,18 +673,18 @@ components:
             description: "The minor units of the currency"
     countries:
       required:
-        - alphaTwoCode
-        - alphaThreeCode
+        - twoLetterCode
+        - threeLetterCode
         - numericCode
         - name
       properties:
-        alphaTwoCode: 
+        twoLetterCode: 
           type: string
           example: "GB"
           minimum: 2
           maximum: 2
           description: The ISO 3166-1 alpha two code of the country
-        alphaThreeCode: 
+        threeLetterCode: 
           type: string  
           example: "GBR"
           minimum: 3
@@ -702,30 +702,23 @@ components:
           description: The name of the country
     languages:
       required:
-        - alphaTwoCode
-        - alphaThreeCode
-        - numericCode
+        - twoLetterCode
+        - threeLetterCode
         - name
       properties:
-        alphaTwoCode: 
+        twoLetterCode: 
           type: string
-          example: "GB"
+          example: "en"
           minimum: 2
           maximum: 2
           description: The ISO 3166-1 alpha two code of the country
-        alphaThreeCode: 
+        threeLetterCode:
           type: string  
-          example: "GBR"
+          example: "eng"
           minimum: 3
           maximum: 3
-          description: The ISO 3166-1 alpha three code of the country
-        numericCode: 
-          type: string
-          minimum: 3
-          maximum: 3            
-          example: "826"
-          description: The ISO 3166-1 numeric code of the country
+          description: The ISO 639-1 three letter code 
         name: 
           type: string  
-          example: "The United Kingdom of Great Britain and Northern Ireland"
-          description: The name of the country          
+          example: "English"
+          description: The name of the language  

@@ -683,19 +683,19 @@ components:
           example: "GB"
           minimum: 2
           maximum: 2
-          description: The ISO 3166-1 alpha two code of the country
+          description: "The ISO 3166-1 two letter code of the country"
         threeLetterCode: 
           type: string  
           example: "GBR"
           minimum: 3
           maximum: 3
-          description: The ISO 3166-1 alpha three code of the country
+          description: "The ISO 3166-1 three letter code of the country"
         numericCode: 
           type: string
           minimum: 3
           maximum: 3            
           example: "826"
-          description: The ISO 3166-1 numeric code of the country
+          description: "The ISO 3166-1 numeric code of the country"
         name: 
           type: string  
           example: "The United Kingdom of Great Britain and Northern Ireland"
@@ -711,13 +711,13 @@ components:
           example: "en"
           minimum: 2
           maximum: 2
-          description: The ISO 3166-1 alpha two code of the country
+          description: "The ISO 639-1 two letter code of the language"
         threeLetterCode:
           type: string  
           example: "eng"
           minimum: 3
           maximum: 3
-          description: The ISO 639-1 three letter code 
+          description: "The ISO 639-1 three letter code of the language"
         name: 
           type: string  
           example: "English"

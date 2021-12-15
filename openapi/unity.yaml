@@ -102,7 +102,7 @@ paths:
                   Voucher Created:
                     value: 
                       voucherNumber: "1234567890"
-                      state: "created"
+                      state: "Created"
                       stateMessage: "Voucher Created"
                       amount: 30.33
                       currency: USD
@@ -115,7 +115,7 @@ paths:
                   Voucher Paid:
                     value: 
                       voucherNumber: "1234567890"
-                      state: "paid"
+                      state: "Paid"
                       stateMessage: "Voucher Paid"
                       amount: 30.33
                       currency: USD
@@ -133,7 +133,7 @@ paths:
                   Voucher Expired:
                     value: 
                       voucherNumber: "1234567890"
-                      state: "expired"                   
+                      state: "Expired"                   
                       stateMessage: "Voucher Expired"
                       amount: 30.33
                       currency: USD
@@ -515,14 +515,14 @@ components:
         voucherNumber: 
             $ref: "#/components/schemas/voucherNumber"
             description: "This is the result of the Voucher Creation"
-            example: "created"
+            example: "Created"
         state: 
             type: string
             enum:
-              - created
-              - paid
-              - expired
-            example: "created"
+              - Created
+              - Paid
+              - Expired
+            example: "Created"
         stateMessage:
           type: string
           example: "Voucher Created"

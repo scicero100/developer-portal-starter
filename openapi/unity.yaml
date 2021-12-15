@@ -345,9 +345,9 @@ paths:
       tags:
         - System Setup
       parameters:
-        - name: countryCode
+        - name: countryAlphaThreeCode
           in: query
-          description: The ISO Country Code
+          description: The ISO 3166-1 alpha three code of the country
           schema:
             type: string
             minLength: 3
@@ -616,30 +616,35 @@ components:
     currencies:
       required:
         - currencyCode
-        - currencyNumber
+        - currencyNumericCode
         - currencyName
         - currencySymbol
+        - currencyMinorUnit
       properties:
           currencyCode: 
             type: string
             example: "GBP"
             minimum: 3
             maximum: 3
-            description: The ISO code of the currency
-          currencyNumber: 
+            description: "The ISO 4217 code of the currency"
+          currencyNumericCode: 
             type: integer  
             example: 826
             minimum: 3
             maximum: 3
-            description: The ISO number of the currency
+            description: "The ISO 4217 numeric code of the currency"
           currencyName: 
             type: string  
             example: "British Pound"
-            description: The name of the currency
+            description: "The name of the currency"
           currencySymbol: 
             type: string  
             example: "£"
-            description: The symbol of the currency
+            description: "The symbol of the currency"
+          currencyMinorUnit: 
+            type: integer  
+            example: 2
+            description: "The minor units of the currency"
     countries:
       required:
         - countryAlphaTwoCode

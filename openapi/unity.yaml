@@ -645,7 +645,7 @@ components:
         - numericCode
         - name
         - symbol
-        - minorUnit
+        - exponent
       properties:
           code: 
             type: string
@@ -667,7 +667,7 @@ components:
             type: string  
             example: "£"
             description: "The symbol of the currency"
-          minorUnit: 
+          exponent: 
             type: integer  
             example: 2
             description: "The minor units of the currency"

@@ -628,8 +628,8 @@ components:
             maximum: 3
             description: "The ISO 4217 code of the currency"
           currencyNumericCode: 
-            type: integer  
-            example: 826
+            type: string  
+            example: "826"
             minimum: 3
             maximum: 3
             description: "The ISO 4217 numeric code of the currency"

@@ -322,7 +322,6 @@ paths:
         - name: currencyCode
           in: query
           description: The ISO Currency Code
-          required: true
           schema:
             type: string
             minLength: 3
@@ -337,6 +336,32 @@ paths:
                 type: array
                 items:
                    $ref: "#/components/schemas/currencies"
+  /countries:
+    servers:
+      - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
+    get:
+      summary: List all countries
+      operationId: listCoutries
+      tags:
+        - System Setup
+      parameters:
+        - name: countryCode
+          in: query
+          description: The ISO Country Code
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 3
+            example: "GBR"
+      responses:
+        200:
+          description: An array of countries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: "#/components/schemas/countries"
 components:
   schemas:
     site:
@@ -615,3 +640,32 @@ components:
             type: string  
             example: "£"
             description: The symbol of the currency
+    countries:
+      required:
+        - countryAlphaTwoCode
+        - countryAlphaThreeCode
+        - countryNumericCode
+        - countryName
+      properties:
+          countryAlphaTwoCode: 
+            type: string
+            example: "GB"
+            minimum: 2
+            maximum: 2
+            description: The ISO 3166-1 alpha two code of the country
+          countryAlphaThreeCode: 
+            type: string  
+            example: "GBR"
+            minimum: 3
+            maximum: 3
+            description: The ISO 3166-1 alpha three code of the country
+          countryNumericCode: 
+            type: number
+            minimum: 3
+            maximum: 3            
+            example: 826
+            description: The ISO 3166-1 numeric code of the country
+          countryName: 
+            type: string  
+            example: "The United Kingdom of Great Britain and Northern Ireland"
+            description: The name of the country

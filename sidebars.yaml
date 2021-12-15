@@ -3,11 +3,6 @@ training:
   - group: Logging
     expanded: false
     pages:
-      - label: Setup
-        page: developer-portal/setup.md
-  - group: Standards
-    expanded: false
-    pages:
       - label: Logging Key Value Pair Definitions
         page: developer-portal/loggingKeyValuePairDefinitions.md
   - group: Reference

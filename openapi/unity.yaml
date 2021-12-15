@@ -321,7 +321,7 @@ paths:
       parameters:
         - name: currencyCode
           in: query
-          description: The ISO Currency Code
+          description: "The ISO 4217 code of the currency"
           schema:
             type: string
             minLength: 3
@@ -362,6 +362,32 @@ paths:
                 type: array
                 items:
                    $ref: "#/components/schemas/countries"
+  /languages:
+    servers:
+      - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
+    get:
+      summary: List all languages
+      operationId: listLanguages
+      tags:
+        - System Setup
+      parameters:
+        - name: countryAlphaThreeCode
+          in: query
+          description: The ISO 3166-1 alpha three code of the country
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 2
+            example: "GBR"
+      responses:
+        200:
+          description: An array of countries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: "#/components/schemas/countries"                   
 components:
   schemas:
     site:
@@ -615,62 +641,91 @@ components:
           maximum: 2            
     currencies:
       required:
-        - currencyCode
-        - currencyNumericCode
-        - currencyName
-        - currencySymbol
-        - currencyMinorUnit
+        - code
+        - numericCode
+        - name
+        - symbol
+        - minorUnit
       properties:
-          currencyCode: 
+          code: 
             type: string
             example: "GBP"
             minimum: 3
             maximum: 3
             description: "The ISO 4217 code of the currency"
-          currencyNumericCode: 
+          numericCode: 
             type: string  
             example: "826"
             minimum: 3
             maximum: 3
             description: "The ISO 4217 numeric code of the currency"
-          currencyName: 
+          name: 
             type: string  
             example: "British Pound"
             description: "The name of the currency"
-          currencySymbol: 
+          symbol: 
             type: string  
             example: "£"
             description: "The symbol of the currency"
-          currencyMinorUnit: 
+          minorUnit: 
             type: integer  
             example: 2
             description: "The minor units of the currency"
     countries:
       required:
-        - countryAlphaTwoCode
-        - countryAlphaThreeCode
-        - countryNumericCode
-        - countryName
+        - alphaTwoCode
+        - alphaThreeCode
+        - numericCode
+        - name
       properties:
-          countryAlphaTwoCode: 
-            type: string
-            example: "GB"
-            minimum: 2
-            maximum: 2
-            description: The ISO 3166-1 alpha two code of the country
-          countryAlphaThreeCode: 
-            type: string  
-            example: "GBR"
-            minimum: 3
-            maximum: 3
-            description: The ISO 3166-1 alpha three code of the country
-          countryNumericCode: 
-            type: string
-            minimum: 3
-            maximum: 3            
-            example: "826"
-            description: The ISO 3166-1 numeric code of the country
-          countryName: 
-            type: string  
-            example: "The United Kingdom of Great Britain and Northern Ireland"
-            description: The name of the country
+        alphaTwoCode: 
+          type: string
+          example: "GB"
+          minimum: 2
+          maximum: 2
+          description: The ISO 3166-1 alpha two code of the country
+        alphaThreeCode: 
+          type: string  
+          example: "GBR"
+          minimum: 3
+          maximum: 3
+          description: The ISO 3166-1 alpha three code of the country
+        numericCode: 
+          type: string
+          minimum: 3
+          maximum: 3            
+          example: "826"
+          description: The ISO 3166-1 numeric code of the country
+        name: 
+          type: string  
+          example: "The United Kingdom of Great Britain and Northern Ireland"
+          description: The name of the country
+    languages:
+      required:
+        - alphaTwoCode
+        - alphaThreeCode
+        - numericCode
+        - name
+      properties:
+        alphaTwoCode: 
+          type: string
+          example: "GB"
+          minimum: 2
+          maximum: 2
+          description: The ISO 3166-1 alpha two code of the country
+        alphaThreeCode: 
+          type: string  
+          example: "GBR"
+          minimum: 3
+          maximum: 3
+          description: The ISO 3166-1 alpha three code of the country
+        numericCode: 
+          type: string
+          minimum: 3
+          maximum: 3            
+          example: "826"
+          description: The ISO 3166-1 numeric code of the country
+        name: 
+          type: string  
+          example: "The United Kingdom of Great Britain and Northern Ireland"
+          description: The name of the country          

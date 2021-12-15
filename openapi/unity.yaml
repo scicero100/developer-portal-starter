@@ -117,13 +117,13 @@ paths:
                       voucherNumber: "1234567890"
                       state: "Paid"
                       stateMessage: "Voucher Paid"
-                      amount: 30.33
+                      amount: 30.32
                       currency: USD
                       paymentTypeAmounts:
-                        cash: 10.20
-                        cheque: 20.10
-                        chips: 0.00
-                        other: 0.00
+                        cash: 10.08
+                        cheque: 10.08
+                        chips: 5.08
+                        other: 5.08
                       shopper:
                         id: "shopper_01"
                         firstName: "John"

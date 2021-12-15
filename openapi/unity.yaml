@@ -309,7 +309,34 @@ paths:
               schema:
                 type: array
                 items:
-                   $ref: "#/components/schemas/merchant"
+                   $ref: "#/components/schemas/merchants"
+  /currencies:
+    servers:
+      - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
+    get:
+      summary: List all currencies
+      operationId: listCurrencies
+      tags:
+        - System Setup
+      parameters:
+        - name: currencyCode
+          in: query
+          description: The ISO Currency Code
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 3
+            example: "GBP"
+      responses:
+        200:
+          description: An array of currencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: "#/components/schemas/currencies"
 components:
   schemas:
     site:
@@ -495,7 +522,7 @@ components:
           type: string
           example: "Approved"
           description: This is the result message of the transaction
-    merchant:
+    merchants:
       required:
         - id
         - name
@@ -561,4 +588,30 @@ components:
           description: "The country of the merchant.  This is an ISO 3166-1 format"
           minimum: 2
           maximum: 2            
-      
+    currencies:
+      required:
+        - currencyCode
+        - currencyNumber
+        - currencyName
+        - currencySymbol
+      properties:
+          currencyCode: 
+            type: string
+            example: "GBP"
+            minimum: 3
+            maximum: 3
+            description: The ISO code of the currency
+          currencyNumber: 
+            type: integer  
+            example: 826
+            minimum: 3
+            maximum: 3
+            description: The ISO number of the currency
+          currencyName: 
+            type: string  
+            example: "British Pound"
+            description: The name of the currency
+          currencySymbol: 
+            type: string  
+            example: "£"
+            description: The symbol of the currency

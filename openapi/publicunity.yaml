@@ -42,7 +42,7 @@ paths:
                 shopper:
                   $ref: "#/components/schemas/shopper"
               oneOf:
-                - $ref: "#/components/schemas/card"                  
+                - $ref: "#/components/schemas/moto"                  
       responses:
         200:
           description: Voucher Created
@@ -1113,4 +1113,38 @@ components:
         name: 
           type: string  
           example: "English"
-          description: The name of the language  
+          description: The name of the language
+    moto:
+      type: object
+      required: 
+        - card
+        - addressVerification
+        - shopper            
+      properties:
+        card:
+          $ref: "#/components/schemas/card"
+        addressVerification:
+          $ref: "#/components/schemas/addressVerification"
+        shopper:
+          $ref: "#/components/schemas/shopper"
+    addressVerification:
+      required:
+        - houseNumberOrName
+        - postalCode
+        - country
+      properties:
+        houseNumberOrName: 
+          type: string
+          example: "en"
+          maximum: 100
+          description: "The number or name of the house"
+        postalCode:
+          type: string  
+          example: ""
+          maximum: 10
+          description: "A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries"
+        country: 
+          type: string  
+          example: "GB"
+          description: "The two-character country code as defined in ISO-3166-1 alpha-2"           
+          

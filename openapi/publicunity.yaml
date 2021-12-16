@@ -1033,6 +1033,8 @@ components:
             - postCodePartialMatchAddressNotMatched
             - postCodePartialMatchAddressNotChecked
             - postCodeNotCheckedAddressPartialMatch
+        providerResult:
+          $ref: "#/components/schemas/providerResult"          
     providerResult:
       required:
         - state
@@ -1046,6 +1048,22 @@ components:
           $ref: "#/components/schemas/providerState"
         stateMessage:
           $ref: "#/components/schemas/providerStateMessage"
+        merchantId:
+          type: string
+          required: 
+            - merchantId
+          example: 77772182
+        cardSchemeReference:
+          type: string
+          required:
+            - cardSchemeReference
+          example: "A125221525"
+        rawCvcResult:
+          type: string
+          example: A
+        rawAvsResult:
+          type: string
+          example: D
     createVoucherResponse:
       required:
         - state

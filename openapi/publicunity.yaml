@@ -50,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/authorisationResponse"               
         default:
           description: Error
           content:
@@ -996,6 +996,43 @@ components:
           $ref: "#/components/schemas/transactionState"
         stateMessage:
           $ref: "#/components/schemas/transactionStateMessage"          
+        authorityCode:
+          type: string
+          required:
+            - authorityCode
+          example: "123456"
+        cvcResult:
+          type: string
+          required:
+            - cvcResult
+          enum:
+            - noInformationAvailable
+            - cardSecurityCodeMatched
+            - cardSecurityCodeNotMatched
+            - cardSecurityCodeNotChecked
+          description: This is the card verification result
+        avsResult:
+          type: string
+          required:
+            - avsResult
+          enum:
+            - noInformationAvailable
+            - postCodeMatchedAddressMatched
+            - postCodeMatchedAddressNotMatched
+            - postCodeMatchedAddressNotChecked
+            - postCodeNotMatchedAddressMatched
+            - postCodeNotMatchedAddressNotMatched
+            - postCodeNotMatchedAddressNotChecked
+            - postCodeNotCheckedAddressMatthed
+            - postCodeNotCheckedAddressNotMatched
+            - postCodeNotCheckedAddressNotChecked
+            - postCodeMatchedANDAddressPartialMatch
+            - postCodePartialMatchAddressMatched
+            - postCodePartialMatchAddressPartialMatch
+            - postCodeNotMatchedAddressPartialMatch
+            - postCodePartialMatchAddressNotMatched
+            - postCodePartialMatchAddressNotChecked
+            - postCodeNotCheckedAddressPartialMatch
     providerResult:
       required:
         - state

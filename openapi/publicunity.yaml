@@ -11,7 +11,7 @@ info:
 paths:
   /transactions/authorisations:
     servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1/  
+      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
       summary: Create a authorisation
       operationId: createAuthorisation
@@ -76,7 +76,7 @@ paths:
                     example: "['$.voucherNumber' - The voucherNumber field is required]"
   /transactions/{systemTransactionReference}/incrementals:
     servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1/   
+      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
       summary: Increment a transaction
       operationId: incrementals
@@ -126,7 +126,7 @@ paths:
                     example: "['$.voucherNumber' - The voucherNumber field is required]"
   /transactions/{systemTransactionReference}/captures:
     servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1/   
+      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1   
     post:
       summary: Capture a transaction
       operationId: captures
@@ -176,7 +176,7 @@ paths:
                     example: "['$.voucherNumber' - The voucherNumber field is required]"
   /transactions/{systemTransactionReference}/refunds:
     servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1/   
+      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
       summary: Refund a transaction
       operationId: refunds
@@ -226,7 +226,7 @@ paths:
                     example: "['$.voucherNumber' - The voucherNumber field is required]" 
   /transactions/{systemTransactionReference}/cancels:
     servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1/   
+      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1
     post:
       summary: Cancel a transaction
       operationId: cancels

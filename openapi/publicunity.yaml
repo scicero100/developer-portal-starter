@@ -1128,15 +1128,11 @@ components:
       required: 
         - card
         - addressVerification
-        - shopper
       properties:
         card:
           $ref: "#/components/schemas/card"
         addressVerification:
-          $ref: "#/components/schemas/addressVerification"
-        shopper:
-          $ref: "#/components/schemas/shopper"
-          
+          $ref: "#/components/schemas/addressVerification"         
     addressVerification:
       required:
         - houseNumberOrName

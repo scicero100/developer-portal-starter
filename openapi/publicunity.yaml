@@ -81,7 +81,7 @@ paths:
       summary: Increment a transaction
       operationId: incrementals
       tags:
-        - Transactions
+        - Modifications
       parameters:
         - name: systemTransactionReference
           in: path
@@ -131,7 +131,7 @@ paths:
       summary: Capture a transaction
       operationId: captures
       tags:
-        - Transactions
+        - Modifications
       parameters:
         - name: systemTransactionReference
           in: path
@@ -181,7 +181,7 @@ paths:
       summary: Refund a transaction
       operationId: refunds
       tags:
-        - Transactions
+        - Modifications
       parameters:
         - name: systemTransactionReference
           in: path
@@ -231,7 +231,7 @@ paths:
       summary: Cancel a transaction
       operationId: cancels
       tags:
-        - Transactions
+        - Modifications
       parameters:
         - name: systemTransactionReference
           in: path

@@ -1130,7 +1130,7 @@ components:
       type: object
       description: "Required if paymentMethod is of type 'card'" 
       properties:
-        moto:
+        ecom:
           type: object
           required:
             - addressVerification

@@ -328,7 +328,7 @@ paths:
             example: "MERC-0001"            
       responses:
         200:
-          description: An array of merchants
+          description: An array of sites
           content:
             application/json:
               schema:

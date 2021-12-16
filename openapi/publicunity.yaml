@@ -23,6 +23,8 @@ paths:
             schema:
               type: object
               properties:
+                merchant:
+                  $ref: "#/components/schemas/merchant"              
                 site:
                   $ref: "#/components/schemas/site"
                 merchantTransactionReferece:

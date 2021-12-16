@@ -750,6 +750,7 @@ components:
               $ref: "#/components/schemas/shopper"
     card:
       type: object
+      description: "Required if paymentMethod is of type 'Card'" 
       properties:
         card:
           type: object

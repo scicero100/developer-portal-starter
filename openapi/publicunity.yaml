@@ -46,7 +46,7 @@ paths:
                   $ref: "#/components/schemas/shopper"
       responses:
         200:
-          description: Voucher Created
+          description: Authorisation Response
           content:
             application/json:
               schema:
@@ -701,7 +701,36 @@ components:
       pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
       minimum: 36
       maximum: 36  
-      description: This is the unique transaction reference returned by Pxp Financial      
+      description: This is the unique transaction reference returned by Pxp Financial      #
+    transactionState:
+      required:
+        - state
+      type: string
+      enum:
+        - approved
+        - authorised
+        - declined
+        - referred
+      example: approved
+      description: This is the state of the transaction
+    transactionStateMessage:
+      required:
+        - state
+      type: string
+      example: approved
+      description: This is the state of the transaction
+    providerState:
+      required:
+        - state
+      type: string
+      example: approved
+      description: This is the state of the transaction returned by the provider
+    providerStateMessage:
+      required:
+        - state
+      type: string
+      example: approved
+      description: This is the state of the transaction returned by the provider     
     voucherNumber:
       required: 
         - voucherNumber    
@@ -952,6 +981,34 @@ components:
           $ref: "#/components/schemas/paymentTypeAmounts"                    
         shopper:
           $ref: "#/components/schemas/shopper"
+    authorisationResponse:
+      required:
+        - systemTransactionReference
+        - state
+        - stateMessage
+        - approvalCode
+        - cvcResult
+        - avsResult
+      properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"
+        state:
+          $ref: "#/components/schemas/transactionState"
+        stateMessage:
+          $ref: "#/components/schemas/transactionStateMessage"          
+    providerResult:
+      required:
+        - state
+        - stateMessage
+        - merchantId
+        - cardSchemeReference
+        - rawCvcResult
+        - rawAvsResult
+      properties:
+        state:
+          $ref: "#/components/schemas/providerState"
+        stateMessage:
+          $ref: "#/components/schemas/providerStateMessage"
     createVoucherResponse:
       required:
         - state

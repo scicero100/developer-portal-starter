@@ -599,17 +599,17 @@ components:
           description: "This is the result message of the Voucher Creation"
     transactionResponse:
       required:
-        - systemTransactionId
+        - systemTransactionReference
         - state
         - stateMessage
       properties:
-        systemTransactionId:
+        systemTransactionReference:
           type: string
           example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
           pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
           minimum: 36
           maximum: 36  
-          description: This is the unique transaction id returned by Pxp Financial
+          description: This is the unique transaction reference returned by Pxp Financial
         state:
           type: string
           example: "Approved"

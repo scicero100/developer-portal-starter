@@ -39,10 +39,9 @@ paths:
                   $ref: "#/components/schemas/amount"                  
                 currency:
                   $ref: "#/components/schemas/currency"
-                shopper:
-                  $ref: "#/components/schemas/shopper"
               oneOf:
                 - $ref: "#/components/schemas/moto"                  
+                - $ref: "#/components/schemas/ecom"
       responses:
         200:
           description: Voucher Created
@@ -749,46 +748,43 @@ components:
     card:
       type: object
       description: "Required if paymentMethod is of type 'Card'" 
+      required:
+      - number
+      - expiryMonth
+      - expiryYear
+      - holderName
+      - cvc          
       properties:
-        card:
-          type: object
-          required:
-            - number
-            - expiryMonth
-            - expiryYear
-            - holderName
-            - cvc          
-          properties:
-            number:
-              type: string
-              pattern: '^[0-9]'
-              example: "4444333322221111"
-              maximum: 19      
-              description: This is the card holder number
-            expiryMonth: 
-              type: string
-              pattern: '^[0-9]'
-              example: "03"
-              maximum: 2      
-              description: This is the expiry month [MM] of the card
-            expiryYear: 
-              type: string
-              pattern: '^[0-9]'
-              example: "2025"
-              maximum: 4      
-              description: This is the expiry year [YYYY] of the card
-            holderName: 
-              type: string
-              pattern: '^[0-9]'
-              example: "2025"
-              maximum: 4
-              description: This is card holders name
-            cvc: 
-              type: string
-              pattern: '^[0-9]'
-              example: "123"
-              maximum: 4      
-              description: This is the cardholder's verification code
+        number:
+          type: string
+          pattern: '^[0-9]'
+          example: "4444333322221111"
+          maximum: 19      
+          description: This is the card holder number
+        expiryMonth: 
+          type: string
+          pattern: '^[0-9]'
+          example: "03"
+          maximum: 2      
+          description: This is the expiry month [MM] of the card
+        expiryYear: 
+          type: string
+          pattern: '^[0-9]'
+          example: "2025"
+          maximum: 4      
+          description: This is the expiry year [YYYY] of the card
+        holderName: 
+          type: string
+          pattern: '^[0-9]'
+          example: "2025"
+          maximum: 4
+          description: This is card holders name
+        cvc: 
+          type: string
+          pattern: '^[0-9]'
+          example: "123"
+          maximum: 4      
+          description: This is the cardholder's verification code
     shopperId:
       type: object 
       required:
@@ -1127,6 +1123,20 @@ components:
           $ref: "#/components/schemas/addressVerification"
         shopper:
           $ref: "#/components/schemas/shopper"
+    ecom:
+      type: object
+      required: 
+        - card
+        - addressVerification
+        - shopper
+      properties:
+        card:
+          $ref: "#/components/schemas/card"
+        addressVerification:
+          $ref: "#/components/schemas/addressVerification"
+        shopper:
+          $ref: "#/components/schemas/shopper"
+          
     addressVerification:
       required:
         - houseNumberOrName

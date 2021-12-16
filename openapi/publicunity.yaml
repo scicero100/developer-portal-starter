@@ -43,6 +43,7 @@ paths:
                   $ref: "#/components/schemas/shopper"
               oneOf:
                 - $ref: "#/components/schemas/card"                  
+                - $ref: "#/components/schemas/car1"
       responses:
         200:
           description: Voucher Created
@@ -782,7 +783,43 @@ components:
               pattern: '^[0-9]'
               example: "123"
               maximum: 4      
-              description: This is the cardholder's verification code 
+              description: This is the cardholder's verification code
+    car1:
+      type: object
+      properties:
+        car1:
+          type: object
+          properties:
+            number: 
+              type: string
+              pattern: '^[0-9]'
+              example: "4444333322221111"
+              maximum: 19      
+              description: This is the card holder number
+            expiryMonth: 
+              type: string
+              pattern: '^[0-9]'
+              example: "03"
+              maximum: 2      
+              description: This is the expiry month [MM] of the card
+            expiryYear: 
+              type: string
+              pattern: '^[0-9]'
+              example: "2025"
+              maximum: 4      
+              description: This is the expiry year [YYYY] of the card
+            holderName: 
+              type: string
+              pattern: '^[0-9]'
+              example: "2025"
+              maximum: 4      
+              description: This is card holders name
+            cvc: 
+              type: string
+              pattern: '^[0-9]'
+              example: "123"
+              maximum: 4      
+              description: This is the cardholder's verification code               
     shopperId:
       type: object 
       required:

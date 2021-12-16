@@ -753,6 +753,12 @@ components:
       properties:
         card:
           type: object
+          required:
+            - number
+            - expiryMonth
+            - expiryYear
+            - holderName
+            - cvc          
           properties:
             number:
               type: string
@@ -776,7 +782,7 @@ components:
               type: string
               pattern: '^[0-9]'
               example: "2025"
-              maximum: 4      
+              maximum: 4
               description: This is card holders name
             cvc: 
               type: string
@@ -784,12 +790,7 @@ components:
               example: "123"
               maximum: 4      
               description: This is the cardholder's verification code
-      required:
-        - number
-        - expiryMonth
-        - expiryYear
-        - holderName
-        - cvc              
+           
     car1:
       type: object
       properties:

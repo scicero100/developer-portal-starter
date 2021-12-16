@@ -34,7 +34,7 @@ paths:
                 paymentMethod:
                   oneOf:
                     - $ref: "#/components/schemas/card"                  
-                    - $ref: "#/components/schemas/sofort"
+                    - $ref: "#/components/schemas/ideal"
                     - $ref: "#/components/schemas/applepay"
                 authorisationType:
                   $ref: "#/components/schemas/authorisationType" 

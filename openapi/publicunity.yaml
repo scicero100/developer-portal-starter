@@ -23,8 +23,6 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: "#/components/schemas/card"
               type: object
               properties:
                 merchant:
@@ -43,6 +41,8 @@ paths:
                   $ref: "#/components/schemas/currency"
                 shopper:
                   $ref: "#/components/schemas/shopper"
+              oneOf:
+                - $ref: "#/components/schemas/card"                  
       responses:
         200:
           description: Voucher Created
@@ -750,7 +750,7 @@ components:
     card:
       type: object
       properties:
-        cage:
+        card:
           type: object
           properties:
             number: 

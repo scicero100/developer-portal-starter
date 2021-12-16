@@ -40,8 +40,6 @@ paths:
                   $ref: "#/components/schemas/authorisationType" 
                 amount:
                   $ref: "#/components/schemas/amount"                  
-                currency:
-                  $ref: "#/components/schemas/currency"
                 shopper:
                   $ref: "#/components/schemas/shopper"
       responses:
@@ -97,8 +95,6 @@ paths:
                       $ref: "#/components/schemas/merchantTransactionReference"
                     amount:
                       $ref: "#/components/schemas/amount"                  
-                    currency:
-                      $ref: "#/components/schemas/currency"
       parameters:
         - name: systemTransactionReference
           in: path
@@ -303,8 +299,6 @@ paths:
                   $ref: "#/components/schemas/voucherNumber"
                 amount:
                   $ref: "#/components/schemas/amount"               
-                currency:
-                  $ref: "#/components/schemas/currency"
                 shopper:
                   $ref: "#/components/schemas/shopper"
       responses:
@@ -427,26 +421,29 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: "#/components/schemas/cage"
-              type: object
               properties:
+                event:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      enum:
+                        - approved
+                        - authorised
+                        - error
+                    date:
+                      type: string
+                      example: "2021-06-28T18:03:50+01:00"
                 merchant:
                   $ref: "#/components/schemas/merchant"
                 site:
                   $ref: "#/components/schemas/site"
+                systemTransactionReference:
+                  $ref: "#/components/schemas/systemTransactionReference"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
-                paymentMethod:
-                  oneOf:
-                    - $ref: "#/components/schemas/card"
-                    - $ref: "#/components/schemas/ecom"  
                 amount:
-                  $ref: "#/components/schemas/amount"               
-                currency:
-                  $ref: "#/components/schemas/currency"
-                state:
-                  $ref: "#/components/schemas/transactionResponse"
+                  $ref: "#/components/schemas/amount"
       responses:
         200:
           description: Voucher Created
@@ -739,19 +736,22 @@ components:
       maximum: 50
       example: "1234567890"
     amount:
-      type: number
+      type: object
       required:
-        - amount
-      description: This is the amount of the transaction.  The numbers after the decimal will be zero padded if they are less than the expected currency exponent i.e. GBP 1.1 = GBP 1.10 OR EUR 1 = EUR 1.00 OR BHD 1.3 = 1.300  The transaction will be rejected if numbers after the decimal are greater than the expected currency exponent i.e. GBP 1.234 OR if a decimal is supplied when the currency of exponent does not require it i.e. JPY 1.0
-      example: 30.32
-    currency:
-      type: string
-      required: 
-        - currency
-      description: This is the currency of the transaction. This is the currency code. A three character code in accordance with ISO 4217
-      minimum: 3
-      maximum: 3
-      example: "EUR"
+        - amount      
+      properties:
+        value:
+          type: object
+          description: This is the amount of the transaction.  The numbers after the decimal will be zero padded if they are less than the expected currency exponent i.e. GBP 1.1 = GBP 1.10 OR EUR 1 = EUR 1.00 OR BHD 1.3 = 1.300  The transaction will be rejected if numbers after the decimal are greater than the expected currency exponent i.e. GBP 1.234 OR if a decimal is supplied when the currency of exponent does not require it i.e. JPY 1.0
+          example: 30.32
+        currency:
+          type: string
+          required: 
+            - currency
+          description: This is the currency of the transaction. This is the currency code. A three character code in accordance with ISO 4217
+          minimum: 3
+          maximum: 3
+          example: "EUR"
     paymentMethodType:
       type: string
       enum:
@@ -954,7 +954,6 @@ components:
         - state
         - stateMessage
         - amount
-        - currency
         - paymentTypeAmounts
         - shopper
       properties:
@@ -975,8 +974,6 @@ components:
           description: "This is the result message of the Voucher Creation"          
         amount: 
           $ref: "#/components/schemas/amount"
-        currency: 
-          $ref: "#/components/schemas/currency"
         paymentTypeAmounts:
           $ref: "#/components/schemas/paymentTypeAmounts"                    
         shopper:

@@ -33,8 +33,9 @@ paths:
                   $ref: "#/components/schemas/merchantTransactionReference"
                 paymentMethod:
                   oneOf:
-                    - $ref: "#/components/schemas/moto"                  
-                    - $ref: "#/components/schemas/ecom"                   
+                    - $ref: "#/components/schemas/card"                  
+                    - $ref: "#/components/schemas/sofort"
+                    - $ref: "#/components/schemas/applepay"
                 authorisationType:
                   $ref: "#/components/schemas/authorisationType" 
                 amount:
@@ -791,6 +792,21 @@ components:
               example: "123"
               maximum: 4      
               description: This is the cardholder's verification code
+              
+    applepay:
+      type: object
+      description: "Required if payment method is of type 'applepay'" 
+      properties:
+        applepay:
+          type: object
+          required:
+            - token
+          properties:
+            token:
+              type: string
+              example: "VNRWtuNlNEWkRCSm1xWndjMDFFbktkQU..."
+              maximum: 100      
+              description: "This is the applepay token"             
     shopperId:
       type: object 
       required:

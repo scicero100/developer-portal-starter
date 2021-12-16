@@ -760,7 +760,7 @@ components:
             - expiryMonth
             - expiryYear
             - holderName
-            - cvc          
+            - cvc
           properties:
             number:
               type: string
@@ -792,7 +792,6 @@ components:
               example: "123"
               maximum: 4      
               description: This is the cardholder's verification code
-              
     applepay:
       type: object
       description: "Required if payment method is of type 'applepay'" 
@@ -804,9 +803,23 @@ components:
           properties:
             token:
               type: string
-              example: "VNRWtuNlNEWkRCSm1xWndjMDFFbktkQU..."
+              example: "VNRWtuNlNEWkRCSm1xWndjMDFFbktkQU"
               maximum: 100      
-              description: "This is the applepay token"             
+              description: "This is the applepay token"    
+    ideal:
+      type: object
+      description: "Required if payment method is of type 'applepay'" 
+      properties:
+        ideal:
+          type: object
+          required:
+            - issuer
+          properties:
+            issuer:
+              type: string
+              example: "1121"
+              maximum: 100      
+              description: "This is the Ideal issuer"
     shopperId:
       type: object 
       required:

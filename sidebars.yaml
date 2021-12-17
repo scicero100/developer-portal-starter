@@ -1,11 +1,16 @@
 training:
   - page: developer-portal/index.md
-  - group: Logging
+  - group: Standards
+    expanded: false
+    pages:
+      - label: Azure Resource Naming Conventions
+        page: developer-portal/azure-naming-conventions.md  
+  - group: Observability
     expanded: false
     pages:
       - label: Logging Key Value Pair Definitions
-        page: developer-portal/loggingKeyValuePairDefinitions.md
-  - group: Reference
+        page: developer-portal/logging-key-value-pair-definitions.md
+  - group: API Reference
     expanded: false
     pages:
       - page: openapi/reference.page.yaml/*

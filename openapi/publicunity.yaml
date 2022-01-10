@@ -62,8 +62,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -122,8 +122,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -170,8 +170,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -218,8 +218,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -266,8 +266,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -321,8 +321,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -464,8 +464,8 @@ paths:
               schema:
                 type: object
                 required:
-                  - code
-                  - reason
+                  - errorCode
+                  - errorReason
                 properties:   
                   code:
                     type: string                
@@ -878,8 +878,8 @@ components:
           description: This is the unique identifier of the shopper
     error:
       required:
-        - code
-        - reason
+        - errorCode
+        - errorReason
       properties:
         code:
           type: string

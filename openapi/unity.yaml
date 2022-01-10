@@ -190,6 +190,10 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - errorCode
+                  - errorReason                 
+                  - correlationId                  
                 properties:   
                   errorCode:
                     type: string                

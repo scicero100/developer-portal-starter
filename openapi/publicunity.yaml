@@ -74,7 +74,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                   
                   details:
                     type: array
                     items: {}
@@ -138,7 +138,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                   
                   details:
                     type: array
                     items: {}
@@ -190,7 +190,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
                   details:
                     type: array
                     items: {}
@@ -242,7 +242,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                  
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                
                   details:
                     type: array
                     items: {}
@@ -294,7 +294,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"           
                   details:
                     type: array
                     items: {}
@@ -353,7 +353,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                 
                   details:
                     type: array
                     items: {}
@@ -500,7 +500,7 @@ paths:
                     example: "One or more validation errors occurred"
                   correlationId:
                     type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                  
                   details:
                     type: array
                     items: {}

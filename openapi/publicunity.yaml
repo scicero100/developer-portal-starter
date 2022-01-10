@@ -64,13 +64,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
                   details:
                     type: array
                     items: {}
@@ -124,13 +128,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
                   details:
                     type: array
                     items: {}
@@ -172,13 +180,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",
                   details:
                     type: array
                     items: {}
@@ -220,13 +232,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                  
                   details:
                     type: array
                     items: {}
@@ -268,13 +284,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
                   details:
                     type: array
                     items: {}
@@ -323,13 +343,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
                   details:
                     type: array
                     items: {}
@@ -466,13 +490,17 @@ paths:
                 required:
                   - errorCode
                   - errorReason
+                  - correlationId
                 properties:   
-                  code:
+                  errorCode:
                     type: string                
                     example: "INVALID_REQUEST"
-                  reason:
+                  errorReason:
                     type: string                
                     example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354",                    
                   details:
                     type: array
                     items: {}
@@ -880,10 +908,13 @@ components:
       required:
         - errorCode
         - errorReason
+        - correlationId
       properties:
-        code:
+        errorCode:
           type: string
-        reason:
+        errorReason:
+          type: string
+        correlationId:
           type: string
         details:
           type: array  

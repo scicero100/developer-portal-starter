@@ -365,6 +365,45 @@ paths:
                     type: array
                     items: {}
                     example: "['$.voucherNumber' - The voucherNumber field is required]"                        
+  /CageDepositTransactionDetail:
+    servers:
+      - url: merchantEndpoint
+    get:
+      summary: Get cage deposit transactions details
+      operationId: GetCageDepositTransactionsDetails
+      tags:
+        - Cage Transactions
+      parameters:
+        - name: id
+          in: query
+          description: "The id of the shopper. REQUIRED: If username AND email NOT provided"
+          schema:
+            type: string
+            maxLength: 50
+            example: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+        - name: username
+          in: query
+          description: "The username of the shopper. REQUIRED: If email AND id is NOT provided"
+          schema:
+            type: string
+            maxLength: 100
+            example: "john.doe"            
+        - name: email
+          in: query
+          description: "The shopper's email address. REQUIRED: If id AND name is NOT provided"
+          schema:
+            type: string
+            maxLength: 100
+            example: "john.doe@pxpfinancial.com"            
+      responses:
+        200:
+          description: Details for the Cage Deposit Transaction
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/cageDepositTransactionDetailResponse"   
   /notifications:
     post:
       summary: Transaction Notification
@@ -688,13 +727,6 @@ components:
       type: string
       example: approved
       description: This is the state of the transaction returned by the provider     
-    voucherNumber:
-      required: 
-        - voucherNumber    
-      type: string
-      description: This is the voucher number required by the shopper to make a withdrawal
-      maximum: 50
-      example: "1234567890"
     amount:
       type: object
       description: This is the amount of the transaction.
@@ -713,6 +745,14 @@ components:
           minimum: 3
           maximum: 3
           example: "EUR"
+    currency:
+      type: string
+      description: This is the currency of the transaction. This is the currency code. A three character code in accordance with ISO 4217
+      required:
+        - currency
+      minimum: 3
+      maximum: 3
+      example: "EUR"          
     paymentMethodType:
       type: string
       enum:
@@ -912,36 +952,94 @@ components:
           format: email
           description: This is the email address of the shopper
           example: "john.doe@pxpfinancial.com"
-    voucherResponse:
+    cageShopper:
+      description: "This is the details of the cage shopper"
       required:
-        - voucherNumber
-        - state
-        - stateMessage
-        - amount
-        - paymentTypeAmounts
-        - shopper
+        - id
+        - username
+        - email
+        - firstName
+        - lastName
+        - dateOfBirth
+        - identityNumber
+        - homePhoneNumber
+        - mobilePhoneNumber
+        - language
+        - address
       properties:
-        voucherNumber: 
-            $ref: "#/components/schemas/voucherNumber"
-            description: "This is the result of the Voucher Creation"
-            example: "Created"
-        state: 
-            type: string
-            enum:
-              - Created
-              - Paid
-              - Expired
-            example: "Created"
-        stateMessage:
+        id:
           type: string
-          example: "Voucher Created"
-          description: "This is the result message of the Voucher Creation"          
-        amount: 
-          $ref: "#/components/schemas/amount"
-        paymentTypeAmounts:
-          $ref: "#/components/schemas/paymentTypeAmounts"                    
+          pattern: '^[A-Za-z0-9 _-]'
+          example: "Shopper_01"
+          maximum: 50      
+          description: This is the unique identifier of the shopper
+        firstName:
+          type: string
+          description: This is the first name of the shopper
+          example: John          
+          maximum: 100
+        lastName:
+          type: string
+          maximum: 100
+          example: Doe
+          description: This is the last name of the shopper
+        dateOfBirth: 
+          type: string
+          minimum: 10
+          maximum: 10
+          format: date
+          description: This is the date of birth of the shopper. Format [YYYY-MM-DD]
+        email: 
+          type: string
+          maximum: 100
+          format: email
+          description: This is the email address of the shopper
+          example: "john.doe@pxpfinancial.com"
+        identityNumber: 
+          type: string
+          maximum: 100
+          description: This is the identity number of the shopper
+          example: "12345678"
+        homePhoneNumber: 
+          type: string
+          maximum: 100
+          description: This is the home phone number of the shopper
+          example: "+4401920123456"
+        mobilePhoneNumber: 
+          type: string
+          maximum: 100
+          description: This is the mobile phone number of the shopper
+          example: "+4407876123456"   
+        language:
+          type: string
+          maximum: 2
+          description: This is the mobile phone number of the shopper
+          example: "EN"       
+        address:
+          $ref: "#/components/schemas/address"         
+    cageDepositTransactionDetailResponse:
+      required:
+        - cageShopper
+        - limits
+        - merchantTransactionReference
+      properties:
         shopper:
-          $ref: "#/components/schemas/shopper"
+          $ref: "#/components/schemas/cageShopper"
+        limits:
+          type: array
+          items:
+            type: object
+            properties:
+              minLimit:
+                type: number
+                example: 0.01
+              maxLimit:
+                type: number         
+                example: 15.01
+              currency:
+                $ref: "#/components/schemas/currency"
+        merchantTransactionReference:
+          $ref: "#/components/schemas/merchantTransactionReference"          
     authorisationResponse:
       required:
         - systemTransactionReference
@@ -1088,7 +1186,7 @@ components:
             description: The merchant category code assigned to the merchant
           address: 
             $ref: "#/components/schemas/address"
-            description: The address of the merchant
+            description: Address details
     sites:
       required:
         - id
@@ -1113,7 +1211,8 @@ components:
     address:
       required:
         - street
-        - houseNoName
+        - houseNo
+        - houseName
         - postalCode
         - city
         - state
@@ -1122,32 +1221,37 @@ components:
         street:
           type: string
           example: "Street Name"
-          description: "The street name of the merchant"
+          description: "The street name of the occupant"
           maximum: 100         
-        houseNoName:
+        houseNo:
+          type: number
+          example: 120
+          description: "The house number of the occupant"
+          maximum: 100            
+        houseName:
           type: string
           example: "House Name"
-          description: "The house name or number of the merchant"
+          description: "The house name of the occupant"
           maximum: 100  
         postalCode:
           type: string
           example: "Postal Code"
-          description: "The postal code of the merchant"
+          description: "The postal code of the occupant"
           maximum: 15
         city:
           type: string
           example: "City"
-          description: "The city of the merchant"
+          description: "The city of the occupant"
           maximum: 100  
         state:
           type: string
           example: "State"
-          description: "The state of the merchant"
+          description: "The state of the occupant"
           maximum: 100
         country:
           type: string
           example: "GB"
-          description: "The country of the merchant.  This is an ISO 3166-1 format"
+          description: "The country of the occupant.  This is an ISO 3166-1 format"
           minimum: 2
           maximum: 2            
     currencies:

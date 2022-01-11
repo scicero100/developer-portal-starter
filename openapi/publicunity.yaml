@@ -1011,7 +1011,7 @@ components:
         language:
           type: string
           maximum: 2
-          description: This is the mobile phone number of the shopper
+          description: The ISO 639-1 two letter code of the language of the shopper
           example: "EN"       
         address:
           $ref: "#/components/schemas/address"         

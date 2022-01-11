@@ -99,9 +99,6 @@ paths:
                   $ref: "#/components/schemas/site"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
-                paymentMethod:
-                  oneOf:
-                    - $ref: "#/components/schemas/card"                  
                 amount:
                   $ref: "#/components/schemas/amount"                  
                 shopper:

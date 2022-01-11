@@ -94,9 +94,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                merchant:
-                  $ref: "#/components/schemas/merchant"           
+              properties:         
                 site:
                   $ref: "#/components/schemas/site"
                 merchantTransactionReference:

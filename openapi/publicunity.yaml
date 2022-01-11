@@ -13,7 +13,7 @@ paths:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
-      summary: Create an authorisation
+      summary: Create an Authorisation
       operationId: createAuthorisation
       tags:
         - Transactions
@@ -83,7 +83,7 @@ paths:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
-      summary: Create a withdrawal
+      summary: Create a Withdrawal
       operationId: createWithdrawal
       tags:
         - Transactions
@@ -144,7 +144,7 @@ paths:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
-      summary: Increment a transaction
+      summary: Increment a Transaction
       operationId: incrementals
       tags:
         - Modifications
@@ -208,7 +208,7 @@ paths:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1   
     post:
-      summary: Capture a transaction
+      summary: Capture a Transaction
       operationId: captures
       tags:
         - Modifications
@@ -260,7 +260,7 @@ paths:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
     post:
-      summary: Refund a transaction
+      summary: Refund a Transaction
       operationId: refunds
       tags:
         - Modifications
@@ -312,7 +312,7 @@ paths:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1
     post:
-      summary: Cancel a transaction
+      summary: Cancel a Transaction
       operationId: cancels
       tags:
         - Modifications
@@ -364,7 +364,7 @@ paths:
     servers:
       - url: https://merchantEndpoint
     get:
-      summary: Cage Deposit Transaction Details
+      summary: Get Cage Deposit Transaction Details
       operationId: GetCageDepositTransactionsDetails
       tags:
         - Cage Transactions
@@ -399,7 +399,7 @@ paths:
                 $ref: "#/components/schemas/cageDepositTransactionDetailResponse"   
   /notifications:
     post:
-      summary: Transaction Notification
+      summary: Send Transaction Notification
       operationId: transactionNotification
       tags:
         - Notifications   
@@ -473,7 +473,7 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: List all merchants
+      summary: List all Merchants
       operationId: listMerchants
       tags:
         - Merchant Setup
@@ -498,7 +498,7 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: Get merchant details
+      summary: Get Merchant Details
       operationId: GetMerchant
       tags:
         - Merchant Setup
@@ -522,7 +522,7 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: List all sites
+      summary: List all Sites
       operationId: listSites
       tags:
         - Merchant Setup
@@ -554,7 +554,7 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: Get site details
+      summary: Get Site Details
       operationId: getSite
       tags:
         - Merchant Setup
@@ -578,7 +578,7 @@ paths:
     servers:
       - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
     get:
-      summary: List all currencies
+      summary: List all Currencies
       operationId: listCurrencies
       tags:
         - System Setup
@@ -604,7 +604,7 @@ paths:
     servers:
       - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
     get:
-      summary: List all countries
+      summary: List all Countries
       operationId: listCoutries
       tags:
         - System Setup
@@ -630,7 +630,7 @@ paths:
     servers:
       - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
     get:
-      summary: List all languages
+      summary: List all Languages
       operationId: listLanguages
       tags:
         - System Setup

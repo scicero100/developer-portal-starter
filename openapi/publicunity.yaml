@@ -1000,12 +1000,12 @@ components:
           example: "12345678"
         homePhoneNumber: 
           type: string
-          maximum: 100
+          maximum: 25
           description: This is the home phone number of the shopper
           example: "+4401920123456"
         mobilePhoneNumber: 
           type: string
-          maximum: 100
+          maximum: 25
           description: This is the mobile phone number of the shopper
           example: "+4407876123456"   
         language:
@@ -1225,7 +1225,7 @@ components:
           type: number
           example: 120
           description: "The house number of the occupant"
-          maximum: 100            
+          maximum: 10            
         houseName:
           type: string
           example: "House Name"

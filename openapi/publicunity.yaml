@@ -79,6 +79,74 @@ paths:
                     type: array
                     items: {}
                     example: "['$.voucherNumber' - The voucherNumber field is required]"
+  /transactions/withdrawals:
+    servers:
+      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
+    post:
+      summary: Create a withdrawal
+      operationId: createWithdrawal
+      tags:
+        - Transactions
+      requestBody:
+        description: Make a Withdrawal
+        required: true      
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchant:
+                  $ref: "#/components/schemas/merchant"           
+                site:
+                  $ref: "#/components/schemas/site"
+                merchantTransactionReference:
+                  $ref: "#/components/schemas/merchantTransactionReference"
+                paymentMethod:
+                  oneOf:
+                    - $ref: "#/components/schemas/card"                  
+                    - $ref: "#/components/schemas/ideal"
+                    - $ref: "#/components/schemas/applepay"
+                amount:
+                  $ref: "#/components/schemas/amount"                  
+                shopper:
+                  $ref: "#/components/schemas/shopper"
+      responses:
+        200:
+          description: Authorisation Response
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/authorisationResponse"               
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        400:
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - errorCode
+                  - errorReason
+                  - correlationId
+                properties:   
+                  errorCode:
+                    type: string                
+                    example: "INVALID_REQUEST"
+                  errorReason:
+                    type: string                
+                    example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                   
+                  details:
+                    type: array
+                    items: {}
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                    
   /transactions/{systemTransactionReference}/incrementals:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  

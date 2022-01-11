@@ -61,24 +61,20 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
+                properties:
                   errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
+                    $ref: "#/components/schemas/errorCode"
                   errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
+                    $ref: "#/components/schemas/errorReason"
                   correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                   
+                    $ref: "#/components/schemas/correlationId"
                   details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]"
+                    $ref: "#/components/schemas/details"
+              example:
+                errorCode: "INVALID_REQUEST"
+                errorReason: "One or more validation errors occurred"
+                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                details: "['$.site' - The site field is required]"
   /transactions/withdrawals:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
@@ -122,24 +118,20 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
+                properties:
                   errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
+                    $ref: "#/components/schemas/errorCode"
                   errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
+                    $ref: "#/components/schemas/errorReason"
                   correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                   
+                    $ref: "#/components/schemas/correlationId"
                   details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]"                    
+                    $ref: "#/components/schemas/details"
+              example:
+                errorCode: "INVALID_REQUEST"
+                errorReason: "One or more validation errors occurred"
+                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                details: "['$.site' - The site field is required]"
   /transactions/{systemTransactionReference}/incrementals:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
@@ -169,11 +161,11 @@ paths:
             $ref: "#/components/schemas/systemTransactionReference"
       responses:
         200:
-          description: Voucher Created
+          description: Incremental Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/authorisationResponse"               
         default:
           description: Error
           content:
@@ -186,24 +178,20 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
+                properties:
                   errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
+                    $ref: "#/components/schemas/errorCode"
                   errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
+                    $ref: "#/components/schemas/errorReason"
                   correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                   
+                    $ref: "#/components/schemas/correlationId"
                   details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]"
+                    $ref: "#/components/schemas/details"
+              example:
+                errorCode: "INVALID_REQUEST"
+                errorReason: "One or more validation errors occurred"
+                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                details: "['$.site' - The site field is required]"
   /transactions/{systemTransactionReference}/captures:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1   
@@ -221,11 +209,11 @@ paths:
             $ref: "#/components/schemas/systemTransactionReference"
       responses:
         200:
-          description: Voucher Created
+          description: Capture Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/authorisationResponse"               
         default:
           description: Error
           content:
@@ -238,24 +226,20 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
+                properties:
                   errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
+                    $ref: "#/components/schemas/errorCode"
                   errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
+                    $ref: "#/components/schemas/errorReason"
                   correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                    $ref: "#/components/schemas/correlationId"
                   details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]"
+                    $ref: "#/components/schemas/details"
+              example:
+                errorCode: "INVALID_REQUEST"
+                errorReason: "One or more validation errors occurred"
+                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                details: "['$.site' - The site field is required]"
   /transactions/{systemTransactionReference}/refunds:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
@@ -273,11 +257,11 @@ paths:
             $ref: "#/components/schemas/systemTransactionReference"
       responses:
         200:
-          description: Voucher Created
+          description: Refund Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/authorisationResponse"               
         default:
           description: Error
           content:
@@ -290,24 +274,20 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
+                properties:
                   errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
+                    $ref: "#/components/schemas/errorCode"
                   errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
+                    $ref: "#/components/schemas/errorReason"
                   correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                
+                    $ref: "#/components/schemas/correlationId"
                   details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]" 
+                    $ref: "#/components/schemas/details"
+              example:
+                errorCode: "INVALID_REQUEST"
+                errorReason: "One or more validation errors occurred"
+                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                details: "['$.site' - The site field is required]"
   /transactions/{systemTransactionReference}/cancels:
     servers:
       - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1
@@ -325,11 +305,11 @@ paths:
             $ref: "#/components/schemas/systemTransactionReference"
       responses:
         200:
-          description: Voucher Created
+          description: Cancel Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/authorisationResponse"               
         default:
           description: Error
           content:
@@ -342,24 +322,20 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
+                properties:
                   errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
+                    $ref: "#/components/schemas/errorCode"
                   errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
+                    $ref: "#/components/schemas/errorReason"
                   correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"           
+                    $ref: "#/components/schemas/correlationId"
                   details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]"                        
+                    $ref: "#/components/schemas/details"
+              example:
+                errorCode: "INVALID_REQUEST"
+                errorReason: "One or more validation errors occurred"
+                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
+                details: "['$.site' - The site field is required]"                      
   /CageDepositTransactionDetail:
     servers:
       - url: https://merchantEndpoint
@@ -434,7 +410,7 @@ paths:
                   $ref: "#/components/schemas/amount"
       responses:
         200:
-          description: Voucher Created
+          description: Notification Response
           content:
             application/json:
               schema:
@@ -445,30 +421,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - errorCode
-                  - errorReason
-                  - correlationId
-                properties:   
-                  errorCode:
-                    type: string                
-                    example: "INVALID_REQUEST"
-                  errorReason:
-                    type: string                
-                    example: "One or more validation errors occurred"
-                  correlationId:
-                    type: string
-                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                  
-                  details:
-                    type: array
-                    items: {}
-                    example: "['$.voucherNumber' - The voucherNumber field is required]"      
   /merchants:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
@@ -651,7 +603,7 @@ paths:
               schema:
                 type: array
                 items:
-                   $ref: "#/components/schemas/languages"                   
+                   $ref: "#/components/schemas/languages"
 components:
   schemas:
     merchant:
@@ -746,32 +698,6 @@ components:
       minimum: 3
       maximum: 3
       example: "EUR"          
-    paymentMethodType:
-      type: string
-      enum:
-        - astroPay
-        - card
-        - cardPresent
-        - citadel
-        - eps
-        - echeckSelect
-        - finTech
-        - giropay
-        - ideal
-        - idebit
-        - instadebit
-        - interac
-        - p24
-        - payWithMyBank
-        - platba24
-        - pinBank
-        - skrill
-        - sofort
-        - trustly
-        - trustlyPayPlay
-        - vipPreferred
-      description: The type of payment method used for the transaction
-      example: "card"
     authorisationType:
       type: string
       enum:
@@ -779,14 +705,6 @@ components:
         - final
       description: This is the type of authorisation
       example: "final"      
-    cage:
-      type: object
-      properties:
-        cage:
-          type: object
-          properties:
-            shopper: 
-              $ref: "#/components/schemas/shopper"
     card:
       type: object
       description: "Required if paymentMethod is of type 'Card'" 
@@ -858,17 +776,6 @@ components:
               example: "1121"
               maximum: 100      
               description: "This is the Ideal issuer"
-    shopperId:
-      type: object 
-      required:
-        - id
-      properties:
-        id:
-          type: string
-          pattern: '^[A-Za-z0-9 _-]'
-          example: "Shopper_01"
-          maximum: 50      
-          description: This is the unique identifier of the shopper
     error:
       required:
         - errorCode
@@ -883,31 +790,33 @@ components:
           type: string
         details:
           type: array  
-          items: {}  
-    paymentTypeAmounts:
-      description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"
+          items: {}
+    errorCode:
+      description: "This is the error code return for the operation"
       required:
-        - cash
-        - chip
-        - cheque
-        - other
+        - errorCode
       properties:
-        cash:
-          type: number
-          example: 10.08
-          description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
-        chip:
-          type: number
-          example: 10.08
-          description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
-        cheque:
-          type: number
-          example: 5.08
-          description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
-        other: 
-          type: number
-          example: 5.08
-          description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
+        errorCode:
+          type: string
+    errorReason:
+      description: "This is the error reason return for the operation"
+      required:
+        - errorReason
+      properties:
+        errorReason:
+          type: string
+    correlationId:
+      description: "This is a unqiue reference generated by the PSP to locate the error"
+      required:
+        - correlationId
+      properties:
+        correlationId:
+          type: string
+          example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354" 
+    details:
+      type: array  
+      items: {} 
+      example: "['$.voucherNumber' - The voucherNumber field is required]"
     shopper:
       description: "This is the details of the shopper"
       required:

@@ -714,7 +714,7 @@ components:
       required:
         - state
       type: string
-      example: approved
+      example: Withdrawal Pending
       description: This is the state of the transaction
     providerState:
       required:

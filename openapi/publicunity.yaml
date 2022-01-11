@@ -702,19 +702,11 @@ components:
         - referred
       example: approved
       description: This is the state of the transaction
-    withdrawalState:
-      required:
-        - pending
-      type: string
-      enum:
-        - pending
-      example: pending
-      description: This is the state of the transaction      
     transactionStateMessage:
       required:
         - state
       type: string
-      example: Withdrawal Pending
+      example: approved
       description: This is the state of the transaction
     providerState:
       required:
@@ -1044,13 +1036,19 @@ components:
     withdrawalResponse:
       required:
         - systemTransactionReference
-        - withdrawalState
+        - state
         - stateMessage
       properties:
         systemTransactionReference:
           $ref: "#/components/schemas/systemTransactionReference"
         state:
-          $ref: "#/components/schemas/withdrawalState"
+          required:
+            - pending
+          type: string
+          enum:
+            - pending
+          example: pending
+          description: This is the state of the transaction  
         stateMessage:
           $ref: "#/components/schemas/transactionStateMessage"
     authorisationResponse:

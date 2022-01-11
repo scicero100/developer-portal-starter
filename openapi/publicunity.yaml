@@ -369,7 +369,7 @@ paths:
     servers:
       - url: https://merchantEndpoint
     get:
-      summary: Get cage deposit transactions details
+      summary: Cage Deposit Transaction Details
       operationId: GetCageDepositTransactionsDetails
       tags:
         - Cage Transactions
@@ -1028,10 +1028,10 @@ components:
           items:
             type: object
             properties:
-              minLimit:
+              minLimitAmount:
                 type: number
                 example: 0.01
-              maxLimit:
+              maxLimitAmount:
                 type: number         
                 example: 15.01
               currency:

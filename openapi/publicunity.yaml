@@ -367,7 +367,7 @@ paths:
                     example: "['$.voucherNumber' - The voucherNumber field is required]"                        
   /CageDepositTransactionDetail:
     servers:
-      - url: merchantEndpoint
+      - url: https://merchantEndpoint
     get:
       summary: Get cage deposit transactions details
       operationId: GetCageDepositTransactionsDetails
@@ -401,9 +401,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items: 
-                  $ref: "#/components/schemas/cageDepositTransactionDetailResponse"   
+                $ref: "#/components/schemas/cageDepositTransactionDetailResponse"   
   /notifications:
     post:
       summary: Transaction Notification

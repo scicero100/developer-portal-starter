@@ -109,7 +109,7 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/authorisationResponse"               
+                 $ref: "#/components/schemas/withdrawalResponse"               
         default:
           description: Error
           content:
@@ -690,7 +690,7 @@ components:
       pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
       minimum: 36
       maximum: 36  
-      description: This is the unique transaction reference returned by Pxp Financial      #
+      description: This is the unique transaction reference returned by Pxp Financial
     transactionState:
       required:
         - state
@@ -702,6 +702,14 @@ components:
         - referred
       example: approved
       description: This is the state of the transaction
+    withdrawalState:
+      required:
+        - pending
+      type: string
+      enum:
+        - pending
+      example: pending
+      description: This is the state of the transaction      
     transactionStateMessage:
       required:
         - state
@@ -1033,6 +1041,18 @@ components:
                 $ref: "#/components/schemas/currency"
         merchantTransactionReference:
           $ref: "#/components/schemas/merchantTransactionReference"          
+    withdrawalResponse:
+      required:
+        - systemTransactionReference
+        - withdrawalState
+        - stateMessage
+      properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"
+        state:
+          $ref: "#/components/schemas/withdrawalState"
+        stateMessage:
+          $ref: "#/components/schemas/transactionStateMessage"
     authorisationResponse:
       required:
         - systemTransactionReference

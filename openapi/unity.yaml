@@ -35,7 +35,12 @@ paths:
                 shopper:
                   $ref: "#/components/schemas/shopperId"
                 paymentTypeAmounts:
-                  $ref: "#/components/schemas/paymentTypeAmounts"
+                  description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"                
+                  anyOf:
+                    - $ref: "#/components/schemas/cash"
+                    - $ref: "#/components/schemas/chip"
+                    - $ref: "#/components/schemas/cheque"
+                    - $ref: "#/components/schemas/other"
       responses:
         200:
           description: Cage Deposit Approved
@@ -151,7 +156,11 @@ paths:
               type: object 
               properties:
                 paymentTypeAmounts:
-                  $ref: "#/components/schemas/paymentTypeAmounts"
+                  anyOf:
+                    - $ref: "#/components/schemas/cash"
+                    - $ref: "#/components/schemas/chip"
+                    - $ref: "#/components/schemas/cheque"
+                    - $ref: "#/components/schemas/other"
       parameters:
         - name: systemTransactionReference
           in: path
@@ -458,30 +467,22 @@ components:
         details:
           type: array  
           items: {}  
-    paymentTypeAmounts:
-      description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"
-      required:
-        - cash
-        - chip
-        - cheque
-        - other
-      properties:
-        cash:
-          type: number
-          example: 10.08
-          description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
-        chip:
-          type: number
-          example: 10.08
-          description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
-        cheque:
-          type: number
-          example: 5.08
-          description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
-        other: 
-          type: number
-          example: 5.08
-          description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
+    cash:
+      type: number
+      example: 10.08
+      description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
+    chip:
+      type: number
+      example: 10.08
+      description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
+    cheque:
+      type: number
+      example: 5.08
+      description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
+    other:
+        type: number
+        example: 5.08
+        description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"                       
     shopper:
       description: "This is the details of the shopper"
       required:

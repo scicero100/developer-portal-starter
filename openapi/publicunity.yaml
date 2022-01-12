@@ -415,8 +415,8 @@ paths:
     servers:
       - url: https://merchantEndpoint
     get:
-      summary: Get Cage Deposit Transaction Details
-      operationId: GetCageDepositTransactionsDetails
+      summary: Get Cage Deposit Details
+      operationId: GetCageDepositDetails
       tags:
         - Cage Transactions
       parameters:

@@ -156,7 +156,7 @@ paths:
               type: object 
               properties:
                 paymentTypeAmounts:
-                  anyOf:
+                  oneOf:
                     - $ref: "#/components/schemas/cash"
                     - $ref: "#/components/schemas/chip"
                     - $ref: "#/components/schemas/cheque"
@@ -468,21 +468,29 @@ components:
           type: array  
           items: {}  
     cash:
-      type: number
-      example: 10.08
-      description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
+      properties:
+        cash:
+          type: number
+          example: 10.08
+          description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
     chip:
-      type: number
-      example: 10.08
-      description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
+      properties:
+        chip:    
+          type: number
+          example: 10.08
+          description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
     cheque:
-      type: number
-      example: 5.08
-      description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
+      properties:
+        cheque:    
+          type: number
+          example: 5.08
+          description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
     other:
-        type: number
-        example: 5.08
-        description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"                       
+      properties:
+        other:      
+          type: number
+          example: 5.08
+          description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"                       
     shopper:
       description: "This is the details of the shopper"
       required:

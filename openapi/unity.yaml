@@ -156,6 +156,7 @@ paths:
               type: object 
               properties:
                 paymentTypeAmounts:
+                  description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"                
                   anyOf:
                     - $ref: "#/components/schemas/cash"
                     - $ref: "#/components/schemas/chip"

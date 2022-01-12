@@ -550,11 +550,12 @@ components:
           $ref: "#/components/schemas/systemTransactionReference"
         state:
           required:
-            - pending
+            - Pending
+            - Executed
           type: string
           enum:
-            - pending
-          example: pending
+            - Pending
+            - Executed
           description: This is the state of the transaction  
         stateMessage:
           $ref: "#/components/schemas/transactionStateMessage"

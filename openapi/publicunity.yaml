@@ -3,52 +3,46 @@ servers:
   - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1
 info:
   description: >-
-    This is an API reference for all public Unity services
+    This is an API reference for all internal Unity services
   version: 1.0.0
-  title: Unity
+  title: Unity (Internal Services)
   contact:
     email: salvatore.cicero@pxpfinancial.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /transactions/authorisations:
-    servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
+  /deposits:
     post:
-      summary: Create an Authorisation
-      operationId: createAuthorisation
+      summary: Create a Cage Deposit
+      operationId: createDeposit
       tags:
-        - Transactions
+        - Cage Transactions
       requestBody:
-        description: Authorise a transaction
-        required: true      
+        description: Create a Cage Deposit
+        required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                merchant:
-                  $ref: "#/components/schemas/merchant"           
                 site:
                   $ref: "#/components/schemas/site"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
-                paymentMethod:
-                  oneOf:
-                    - $ref: "#/components/schemas/card"                  
-                    - $ref: "#/components/schemas/ideal"
-                    - $ref: "#/components/schemas/applepay"
-                authorisationType:
-                  $ref: "#/components/schemas/authorisationType" 
                 amount:
-                  $ref: "#/components/schemas/amount"                  
+                  $ref: "#/components/schemas/amount"
                 shopper:
-                  $ref: "#/components/schemas/shopper"
+                  $ref: "#/components/schemas/shopperId"
+                paymentTypeAmounts:
+                  $ref: "#/components/schemas/paymentTypeAmounts"
       responses:
         200:
-          description: Authorisation Response
+          description: Cage Deposit Approved
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/authorisationResponse"               
+                 $ref: "#/components/schemas/transactionResponse"                  
         default:
           description: Error
           content:
@@ -61,42 +55,44 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
+                required:
+                  - errorCode
+                  - errorReason                 
+                  - correlationId                  
+                properties:   
                   errorCode:
-                    $ref: "#/components/schemas/errorCode"
+                    type: string                
+                    example: "INVALID_REQUEST"
                   errorReason:
-                    $ref: "#/components/schemas/errorReason"
+                    type: string                
+                    example: "One or more validation errors occurred"
                   correlationId:
-                    $ref: "#/components/schemas/correlationId"
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                      
                   details:
-                    $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"
-  /transactions/withdrawals:
-    servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
+                    type: array
+                    items: {}
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                           
+  /withdrawals:
     post:
-      summary: Create a Withdrawal
+      summary: Create a Cage Withdrawal
       operationId: createWithdrawal
       tags:
-        - Transactions
+        - Cage Transactions   
       requestBody:
-        description: Make a Withdrawal
+        description: Create a Cage Withdrawal
         required: true      
         content:
           application/json:
             schema:
               type: object
-              properties:         
+              properties:
                 site:
                   $ref: "#/components/schemas/site"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
                 amount:
-                  $ref: "#/components/schemas/amount"                  
+                  $ref: "#/components/schemas/amount"               
                 shopper:
                   $ref: "#/components/schemas/shopper"
       responses:
@@ -105,7 +101,11 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/withdrawalResponse"               
+                 $ref: "#/components/schemas/withdrawalResponse"
+              example:
+                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                state: "Pending"
+                stateMessage: "Withdrawal Pending"
         default:
           description: Error
           content:
@@ -118,321 +118,104 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
+                required:
+                  - errorCode
+                  - errorReason
+                  - correlationId
+                properties:   
                   errorCode:
-                    $ref: "#/components/schemas/errorCode"
+                    type: string                
+                    example: "INVALID_REQUEST"
                   errorReason:
-                    $ref: "#/components/schemas/errorReason"
+                    type: string                
+                    example: "One or more validation errors occurred"
                   correlationId:
-                    $ref: "#/components/schemas/correlationId"
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                     
                   details:
-                    $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"
-  /transactions/{systemTransactionReference}/incrementals:
-    servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
+                    type: array
+                    items: {}
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                          
+  /withdrawals/{systemTransactionReference}/executions:
     post:
-      summary: Increment a Transaction
-      operationId: incrementals
-      tags:
-        - Modifications
-      requestBody:
-            description: Create an increment
-            required: true      
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    merchantTransactionReference:
-                      $ref: "#/components/schemas/merchantTransactionReference"
-                    amount:
-                      $ref: "#/components/schemas/amount"                  
-      parameters:
-        - name: systemTransactionReference
-          in: path
-          description: The unique systemTransactionReference with which you want to process the Incremental.
-          required: true
-          schema:
-            $ref: "#/components/schemas/systemTransactionReference"
-      responses:
-        200:
-          description: Incremental Response
-          content:
-            application/json:
-              schema:
-                 $ref: "#/components/schemas/authorisationResponse"               
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errorCode:
-                    $ref: "#/components/schemas/errorCode"
-                  errorReason:
-                    $ref: "#/components/schemas/errorReason"
-                  correlationId:
-                    $ref: "#/components/schemas/correlationId"
-                  details:
-                    $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"
-  /transactions/{systemTransactionReference}/captures:
-    servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1   
-    post:
-      summary: Capture a Transaction
-      operationId: captures
-      tags:
-        - Modifications
-      parameters:
-        - name: systemTransactionReference
-          in: path
-          description: The unique systemTransactionReference with which you want to process the Capture.
-          required: true
-          schema:
-            $ref: "#/components/schemas/systemTransactionReference"
-      responses:
-        200:
-          description: Capture Response
-          content:
-            application/json:
-              schema:
-                 $ref: "#/components/schemas/authorisationResponse"               
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errorCode:
-                    $ref: "#/components/schemas/errorCode"
-                  errorReason:
-                    $ref: "#/components/schemas/errorReason"
-                  correlationId:
-                    $ref: "#/components/schemas/correlationId"
-                  details:
-                    $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"
-  /transactions/{systemTransactionReference}/refunds:
-    servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1  
-    post:
-      summary: Refund a Transaction
-      operationId: refunds
-      tags:
-        - Modifications
-      parameters:
-        - name: systemTransactionReference
-          in: path
-          description: The unique systemTransactionReference with which you want to process the Refund.
-          required: true
-          schema:
-            $ref: "#/components/schemas/systemTransactionReference"
-      responses:
-        200:
-          description: Refund Response
-          content:
-            application/json:
-              schema:
-                 $ref: "#/components/schemas/authorisationResponse"               
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errorCode:
-                    $ref: "#/components/schemas/errorCode"
-                  errorReason:
-                    $ref: "#/components/schemas/errorReason"
-                  correlationId:
-                    $ref: "#/components/schemas/correlationId"
-                  details:
-                    $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"
-  /transactions/{systemTransactionReference}/cancels:
-    servers:
-      - url: https://qa-pxpfinancial-api.azurewebsites.net/api/v1
-    post:
-      summary: Cancel a Transaction
-      operationId: cancels
-      tags:
-        - Modifications
-      parameters:
-        - name: systemTransactionReference
-          in: path
-          description: The unique systemTransactionReference with which you want to process a Cancel.
-          required: true
-          schema:
-            $ref: "#/components/schemas/systemTransactionReference"
-      responses:
-        200:
-          description: Cancel Response
-          content:
-            application/json:
-              schema:
-                 $ref: "#/components/schemas/authorisationResponse"               
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errorCode:
-                    $ref: "#/components/schemas/errorCode"
-                  errorReason:
-                    $ref: "#/components/schemas/errorReason"
-                  correlationId:
-                    $ref: "#/components/schemas/correlationId"
-                  details:
-                    $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"                      
-  /CageDepositTransactionDetail:
-    servers:
-      - url: https://merchantEndpoint
-    get:
-      summary: Get Cage Deposit Transaction Details
-      operationId: GetCageDepositTransactionsDetails
+      summary: Execute a Cage Withdrawal
+      operationId: redeemWithdrawal
       tags:
         - Cage Transactions
-      parameters:
-        - name: id
-          in: query
-          description: "The id of the shopper. REQUIRED: If username AND email NOT provided"
-          schema:
-            type: string
-            maxLength: 50
-            example: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-        - name: username
-          in: query
-          description: "The username of the shopper. REQUIRED: If email AND id is NOT provided"
-          schema:
-            type: string
-            maxLength: 100
-            example: "john.doe"            
-        - name: email
-          in: query
-          description: "The shopper's email address. REQUIRED: If id AND name is NOT provided"
-          schema:
-            type: string
-            maxLength: 100
-            example: "john.doe@pxpfinancial.com"            
-      responses:
-        200:
-          description: Details for the Cage Deposit Transaction
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/cageDepositTransactionDetailResponse"   
-  /notifications:
-    post:
-      summary: Send Transaction Notification
-      operationId: transactionNotification
-      tags:
-        - Notifications   
       requestBody:
-        description: Transaction Notification
-        required: true      
+        description: Execute a Cage Withdrawal
+        required: true
         content:
           application/json:
             schema:
+              type: object 
               properties:
-                event:
-                  type: object
-                  properties:
-                    code:
-                      type: string
-                      enum:
-                        - approved
-                        - authorised
-                        - error
-                    date:
-                      type: string
-                      example: "2021-06-28T18:03:50+01:00"
-                merchant:
-                  $ref: "#/components/schemas/merchant"
                 site:
                   $ref: "#/components/schemas/site"
-                systemTransactionReference:
-                  $ref: "#/components/schemas/systemTransactionReference"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
-                amount:
-                  $ref: "#/components/schemas/amount"
+                paymentTypeAmounts:
+                  $ref: "#/components/schemas/paymentTypeAmounts"
+      parameters:
+        - name: systemTransactionReference
+          in: path
+          description: The unique systemTransactionReference with which you want to execute the cage withdrawal.
+          required: true
+          schema:
+            $ref: "#/components/schemas/systemTransactionReference"                  
       responses:
         200:
-          description: Notification Response
+          description: Withdrawal Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/withdrawalResponse"
+              example:
+                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                state: "Executed"
+                stateMessage: "Withdrawal Executed"
         default:
           description: Error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
+        400:
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - errorCode
+                  - errorReason                 
+                  - correlationId
+                properties: 
+                  errorCode:
+                    type: string                
+                    example: "INVALID_REQUEST"
+                  errorReason:
+                    type: string                
+                    example: "One or more validation errors occurred"
+                  correlationId:
+                    type: string
+                    example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"                     
+                  details:
+                    type: array
+                    items: {}
+                    example: "['$.voucherNumber' - The voucherNumber field is required]"                    
   /merchants:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: List all Merchants
+      summary: List all merchants
       operationId: listMerchants
       tags:
         - Merchant Setup
       parameters:
-        - name: referrer
+        - name: partner
           in: query
-          description: The unique referrer identifier. This value is generated by PXP Financial
+          description: The unique partner identifier. This value is generated by PXP Financial
           schema:
             type: string
             maxLength: 20
@@ -450,7 +233,7 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: Get Merchant Details
+      summary: Get merchant details
       operationId: GetMerchant
       tags:
         - Merchant Setup
@@ -474,14 +257,14 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: List all Sites
+      summary: List all sites
       operationId: listSites
       tags:
         - Merchant Setup
       parameters:
-        - name: referrer
+        - name: partner
           in: query
-          description: The unique referrer identifier. This value is generated by PXP Financial
+          description: The unique partner identifier. This value is generated by PXP Financial
           schema:
             type: string
             maxLength: 20
@@ -506,7 +289,7 @@ paths:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
     get:
-      summary: Get Site Details
+      summary: Get site details
       operationId: getSite
       tags:
         - Merchant Setup
@@ -530,7 +313,7 @@ paths:
     servers:
       - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
     get:
-      summary: List all Currencies
+      summary: List all currencies
       operationId: listCurrencies
       tags:
         - System Setup
@@ -556,7 +339,7 @@ paths:
     servers:
       - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
     get:
-      summary: List all Countries
+      summary: List all countries
       operationId: listCoutries
       tags:
         - System Setup
@@ -582,7 +365,7 @@ paths:
     servers:
       - url: https://qa-pxp-systemsetup-api.azurewebsites.net/api/v1
     get:
-      summary: List all Languages
+      summary: List all languages
       operationId: listLanguages
       tags:
         - System Setup
@@ -603,75 +386,23 @@ paths:
               schema:
                 type: array
                 items:
-                   $ref: "#/components/schemas/languages"
+                   $ref: "#/components/schemas/languages"                   
 components:
   schemas:
-    merchant:
-      type: string
-      required:
-        - merchant
-      description: The unique merchant identifier, with which you want to process the transaction. This can be for example a store, hotel, a website etc. This value is generated by PXP Financial
-      example: "MERC-0001"
-      maximum: 20
     site:
-      type: string
       required: 
-        - site      
+        - site
+      type: string
       description: The unique site identifier, with which you want to process the transaction. This can be for example a store, hotel, a website etc. This value is generated by PXP Financial
       example: "SITE-0001"
       maximum: 20
-    merchantOrderReference:
-      required: 
-        - merchantOrderReference
-      type: string
-      description: The merchantTransactionReference is used to uniquely identify a transaction. This Id is used in all communication with you about the transaction status. There must be a unique value per transaction
-      example: "This_is_my_merchant_transaction_Id"
-      maximum: 50            
     merchantTransactionReference:
       required: 
         - merchantTransactionReference
       type: string
       description: The merchantTransactionReference is used to uniquely identify a transaction. This Id is used in all communication with you about the transaction status. There must be a unique value per transaction
-      example: "This_is_my_merchant_transaction_Id"
-      maximum: 50 
-    systemTransactionReference:
-      required: 
-        - systemTransactionReference
-      type: string
-      example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
-      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-      minimum: 36
-      maximum: 36  
-      description: This is the unique transaction reference returned by Pxp Financial
-    transactionState:
-      required:
-        - state
-      type: string
-      enum:
-        - approved
-        - authorised
-        - declined
-        - referred
-      example: approved
-      description: This is the state of the transaction
-    transactionStateMessage:
-      required:
-        - state
-      type: string
-      example: approved
-      description: This is the state of the transaction
-    providerState:
-      required:
-        - state
-      type: string
-      example: approved
-      description: This is the state of the transaction returned by the provider
-    providerStateMessage:
-      required:
-        - state
-      type: string
-      example: approved
-      description: This is the state of the transaction returned by the provider     
+      example: "This is my transaction reference"
+      maximum: 50      
     amount:
       type: object
       description: This is the amount of the transaction.
@@ -689,97 +420,31 @@ components:
           description: This is the currency of the transaction. This is the currency code. A three character code in accordance with ISO 4217
           minimum: 3
           maximum: 3
-          example: "EUR"
-    currency:
+          example: "EUR" 
+    systemTransactionReference:
+      required: 
+        - systemTransactionReference
       type: string
-      description: This is the currency of the transaction. This is the currency code. A three character code in accordance with ISO 4217
+      example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
+      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+      minimum: 36
+      maximum: 36  
+      description: This is the unique transaction reference returned by Pxp Financial          
+    shopperId:
+      type: object 
       required:
-        - currency
-      minimum: 3
-      maximum: 3
-      example: "EUR"          
-    authorisationType:
-      type: string
-      enum:
-        - preAuthorisation
-        - final
-      description: This is the type of authorisation
-      example: "final"      
-    card:
-      type: object
-      description: "Required if paymentMethod is of type 'Card'" 
+        - id
       properties:
-        card:
-          type: object
-          required:
-            - number
-            - expiryMonth
-            - expiryYear
-            - holderName
-            - cvc
-          properties:
-            number:
-              type: string
-              pattern: '^[0-9]'
-              example: "4444333322221111"
-              maximum: 19      
-              description: This is the card holder number
-            expiryMonth: 
-              type: string
-              pattern: '^[0-9]'
-              example: "03"
-              maximum: 2      
-              description: This is the expiry month [MM] of the card
-            expiryYear: 
-              type: string
-              pattern: '^[0-9]'
-              example: "2025"
-              maximum: 4      
-              description: This is the expiry year [YYYY] of the card
-            holderName: 
-              type: string
-              pattern: '^[0-9]'
-              example: "2025"
-              maximum: 4
-              description: This is card holders name
-            cvc: 
-              type: string
-              pattern: '^[0-9]'
-              example: "123"
-              maximum: 4      
-              description: This is the cardholder's verification code
-    applepay:
-      type: object
-      description: "Required if payment method is of type 'applepay'" 
-      properties:
-        applepay:
-          type: object
-          required:
-            - token
-          properties:
-            token:
-              type: string
-              example: "VNRWtuNlNEWkRCSm1xWndjMDFFbktkQU"
-              maximum: 100      
-              description: "This is the applepay token"    
-    ideal:
-      type: object
-      description: "Required if payment method is of type 'applepay'" 
-      properties:
-        ideal:
-          type: object
-          required:
-            - issuer
-          properties:
-            issuer:
-              type: string
-              example: "1121"
-              maximum: 100      
-              description: "This is the Ideal issuer"
+        id:
+          type: string
+          pattern: '^[A-Za-z0-9 _-]'
+          example: "Shopper_01"
+          maximum: 50      
+          description: This is the unique identifier of the shopper
     error:
       required:
         - errorCode
-        - errorReason
+        - errorReason   
         - correlationId
       properties:
         errorCode:
@@ -788,27 +453,34 @@ components:
           type: string
         correlationId:
           type: string
+          example: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"           
         details:
           type: array  
-          items: {}
-    errorCode:
-      type: string
-      description: "This is the error code return for the operation"
+          items: {}  
+    paymentTypeAmounts:
+      description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"
       required:
-        - errorCode
-    errorReason:
-      type: string
-      description: "This is the error reason return for the operation"
-      required:
-        - errorReason
-    correlationId:
-      type: string
-      description: "This is a unqiue reference generated by the PSP to locate the error"
-      required:
-        - correlationId
-    details:
-      type: array  
-      items: {} 
+        - cash
+        - chip
+        - cheque
+        - other
+      properties:
+        cash:
+          type: number
+          example: 10.08
+          description: "This is the total amount in cash in order to make a Cage deposit or withdrawal"
+        chip:
+          type: number
+          example: 10.08
+          description: "This is the total amount in chips in order to make a Cage deposit or withdrawal"
+        cheque:
+          type: number
+          example: 5.08
+          description: "This is the total amount in cheques in order to make a Cage deposit or withdrawal"
+        other: 
+          type: number
+          example: 5.08
+          description: "This is the total amount other than cash, chips or cheques in order to make a Cage deposit or withdrawal"
     shopper:
       description: "This is the details of the shopper"
       required:
@@ -846,210 +518,6 @@ components:
           format: email
           description: This is the email address of the shopper
           example: "john.doe@pxpfinancial.com"
-    cageShopper:
-      description: "This is the details of the cage shopper"
-      required:
-        - id
-        - username
-        - email
-        - firstName
-        - lastName
-        - dateOfBirth
-        - identityNumber
-        - homePhoneNumber
-        - mobilePhoneNumber
-        - language
-        - address
-      properties:
-        id:
-          type: string
-          pattern: '^[A-Za-z0-9 _-]'
-          example: "Shopper_01"
-          maximum: 50      
-          description: This is the unique identifier of the shopper
-        firstName:
-          type: string
-          description: This is the first name of the shopper
-          example: John          
-          maximum: 100
-        lastName:
-          type: string
-          maximum: 100
-          example: Doe
-          description: This is the last name of the shopper
-        dateOfBirth: 
-          type: string
-          minimum: 10
-          maximum: 10
-          format: date
-          description: This is the date of birth of the shopper. Format [YYYY-MM-DD]
-        email: 
-          type: string
-          maximum: 100
-          format: email
-          description: This is the email address of the shopper
-          example: "john.doe@pxpfinancial.com"
-        identityNumber: 
-          type: string
-          maximum: 100
-          description: This is the identity number of the shopper
-          example: "12345678"
-        homePhoneNumber: 
-          type: string
-          maximum: 25
-          description: This is the home phone number of the shopper
-          example: "+4401920123456"
-        mobilePhoneNumber: 
-          type: string
-          maximum: 25
-          description: This is the mobile phone number of the shopper
-          example: "+4407876123456"   
-        language:
-          type: string
-          maximum: 2
-          description: The ISO 639-1 two letter code of the language of the shopper
-          example: "EN"       
-        address:
-          $ref: "#/components/schemas/address"         
-    cageDepositTransactionDetailResponse:
-      required:
-        - cageShopper
-        - limits
-        - merchantTransactionReference
-      properties:
-        shopper:
-          $ref: "#/components/schemas/cageShopper"
-        limits:
-          type: array
-          items:
-            type: object
-            properties:
-              minLimitAmount:
-                type: number
-                example: 0.01
-              maxLimitAmount:
-                type: number         
-                example: 15.01
-              currency:
-                $ref: "#/components/schemas/currency"
-        merchantTransactionReference:
-          $ref: "#/components/schemas/merchantTransactionReference"          
-    withdrawalResponse:
-      required:
-        - systemTransactionReference
-        - state
-        - stateMessage
-      properties:
-        systemTransactionReference:
-          $ref: "#/components/schemas/systemTransactionReference"
-        state:
-          required:
-            - pending
-          type: string
-          enum:
-            - pending
-          example: pending
-          description: This is the state of the transaction  
-        stateMessage:
-          $ref: "#/components/schemas/transactionStateMessage"
-    authorisationResponse:
-      required:
-        - systemTransactionReference
-        - state
-        - stateMessage
-        - approvalCode
-        - cvcResult
-        - avsResult
-      properties:
-        systemTransactionReference:
-          $ref: "#/components/schemas/systemTransactionReference"
-        state:
-          $ref: "#/components/schemas/transactionState"
-        stateMessage:
-          $ref: "#/components/schemas/transactionStateMessage"          
-        authorityCode:
-          type: string
-          required:
-            - authorityCode
-          example: "123456"
-        cvcResult:
-          type: string
-          required:
-            - cvcResult
-          enum:
-            - noInformationAvailable
-            - cardSecurityCodeMatched
-            - cardSecurityCodeNotMatched
-            - cardSecurityCodeNotChecked
-          description: This is the card verification result
-        avsResult:
-          type: string
-          required:
-            - avsResult
-          enum:
-            - noInformationAvailable
-            - postCodeMatchedAddressMatched
-            - postCodeMatchedAddressNotMatched
-            - postCodeMatchedAddressNotChecked
-            - postCodeNotMatchedAddressMatched
-            - postCodeNotMatchedAddressNotMatched
-            - postCodeNotMatchedAddressNotChecked
-            - postCodeNotCheckedAddressMatthed
-            - postCodeNotCheckedAddressNotMatched
-            - postCodeNotCheckedAddressNotChecked
-            - postCodeMatchedANDAddressPartialMatch
-            - postCodePartialMatchAddressMatched
-            - postCodePartialMatchAddressPartialMatch
-            - postCodeNotMatchedAddressPartialMatch
-            - postCodePartialMatchAddressNotMatched
-            - postCodePartialMatchAddressNotChecked
-            - postCodeNotCheckedAddressPartialMatch
-        providerResult:
-          $ref: "#/components/schemas/providerResult"          
-    providerResult:
-      required:
-        - state
-        - stateMessage
-        - merchantId
-        - cardSchemeReference
-        - rawCvcResult
-        - rawAvsResult
-      properties:
-        state:
-          $ref: "#/components/schemas/providerState"
-        stateMessage:
-          $ref: "#/components/schemas/providerStateMessage"
-        merchantId:
-          type: string
-          required: 
-            - merchantId
-          example: 77772182
-        cardSchemeReference:
-          type: string
-          required:
-            - cardSchemeReference
-          example: "A125221525"
-        rawCvcResult:
-          type: string
-          example: A
-        rawAvsResult:
-          type: string
-          example: D
-    createVoucherResponse:
-      required:
-        - state
-        - stateMessage
-      properties:
-        state:
-          type: string
-          example: "created"
-          enum:
-            - created
-          description: "This is the result of the Voucher Creation"
-        stateMessage:
-          type: string
-          example: "Voucher Created"
-          description: "This is the result message of the Voucher Creation"
     transactionResponse:
       required:
         - systemTransactionReference
@@ -1073,6 +541,25 @@ components:
           type: string
           example: "Approved"
           description: This is the result message of the transaction
+    transactionStateMessage:
+      required:
+        - state
+      type: string
+      example: approved
+      description: This is the state of the transaction          
+    withdrawalResponse:
+      required:
+        - systemTransactionReference
+        - state
+        - stateMessage
+      properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"
+        state:
+          type: string
+          description: This is the state of the transaction  
+        stateMessage:
+          $ref: "#/components/schemas/transactionStateMessage"
     merchants:
       required:
         - id
@@ -1098,7 +585,7 @@ components:
             description: The merchant category code assigned to the merchant
           address: 
             $ref: "#/components/schemas/address"
-            description: Address details
+            description: The address of the merchant
     sites:
       required:
         - id
@@ -1123,8 +610,7 @@ components:
     address:
       required:
         - street
-        - houseNo
-        - houseName
+        - houseNoName
         - postalCode
         - city
         - state
@@ -1133,37 +619,32 @@ components:
         street:
           type: string
           example: "Street Name"
-          description: "The street name of the occupant"
+          description: "The street name of the merchant"
           maximum: 100         
-        houseNo:
-          type: number
-          example: 120
-          description: "The house number of the occupant"
-          maximum: 10            
-        houseName:
+        houseNoName:
           type: string
           example: "House Name"
-          description: "The house name of the occupant"
+          description: "The house name or number of the merchant"
           maximum: 100  
         postalCode:
           type: string
           example: "Postal Code"
-          description: "The postal code of the occupant"
+          description: "The postal code of the merchant"
           maximum: 15
         city:
           type: string
           example: "City"
-          description: "The city of the occupant"
+          description: "The city of the merchant"
           maximum: 100  
         state:
           type: string
           example: "State"
-          description: "The state of the occupant"
+          description: "The state of the merchant"
           maximum: 100
         country:
           type: string
           example: "GB"
-          description: "The country of the occupant.  This is an ISO 3166-1 format"
+          description: "The country of the merchant.  This is an ISO 3166-1 format"
           minimum: 2
           maximum: 2            
     currencies:
@@ -1248,59 +729,4 @@ components:
         name: 
           type: string  
           example: "English"
-          description: The name of the language
-    moto:
-      type: object
-      description: "Required if paymentMethod is of type 'card'" 
-      properties:
-        moto:
-          type: object
-          properties:
-            addressVerification:
-              $ref: "#/components/schemas/addressVerification"
-    ecom:
-      type: object
-      description: "Required if paymentMethod is of type 'card'" 
-      properties:
-        ecom:
-          type: object
-          properties:
-            addressVerification:
-              $ref: "#/components/schemas/addressVerification"    
-            threeDSecure:
-              $ref: "#/components/schemas/threeDSecure"
-    addressVerification:
-      required:
-        - houseNumberOrName
-        - postalCode
-        - country          
-      properties:
-        houseNumberOrName: 
-          type: string
-          example: "en"
-          maximum: 100
-          description: "The number or name of the house"
-        postalCode:
-          type: string  
-          example: ""
-          maximum: 10
-          description: "A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries"
-        country: 
-          type: string  
-          example: "GB"
-          description: "The two-character country code as defined in ISO-3166-1 alpha-2"   
-    threeDSecure:
-      required:
-        - status
-        - threeDSecureVersion
-      properties:
-        status: 
-          type: string
-          example: "frictionlessAuthenticated"
-          enum:
-            - frictionlessAuthenticated
-          description: "This is the final status during the 3D Secure process. Refer to ThreeDSecure Status under Elements (CONDITIONAL: Required if not supplying threeDSecureId)"
-        threeDSecureVersion:
-          type: string  
-          example: "2.1.0"
-          description: "This is the 3D Secure version returned by PXP's Three D Secure Service. Must be in the format N.N.N (CONDITIONAL: Required if not supplying threeDSecureId)"
+          description: The name of the language  

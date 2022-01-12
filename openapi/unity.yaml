@@ -159,8 +159,11 @@ paths:
           required: true
           schema:
             type: string
-            maxLength: 20
-            example: "MERC-0001"                  
+            minimum: 36
+            maximum: 36
+            example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+      description: This is the unique transaction reference returned by Pxp Financial            
       responses:
         200:
           description: Withdrawal Response

@@ -101,7 +101,11 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/createVoucherResponse"               
+                 $ref: "#/components/schemas/withdrawalResponse"
+              example:
+                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                state: "Pending"
+                stateMessage: "Withdrawal Pending"
         default:
           description: Error
           content:
@@ -154,11 +158,15 @@ paths:
                   $ref: "#/components/schemas/paymentTypeAmounts"
       responses:
         200:
-          description: Cage Withdrawal Approved
+          description: Withdrawal Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/transactionResponse"
+                 $ref: "#/components/schemas/withdrawalResponse"
+              example:
+                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                state: "Executed"
+                stateMessage: "Withdrawal Executed"
         default:
           description: Error
           content:
@@ -388,13 +396,6 @@ components:
       description: The merchantTransactionReference is used to uniquely identify a transaction. This Id is used in all communication with you about the transaction status. There must be a unique value per transaction
       example: "This is my transaction reference"
       maximum: 50      
-    voucherNumber:
-      required: 
-        - voucherNumber    
-      type: string
-      description: This is the voucher number required by the shopper to make a withdrawal
-      maximum: 50
-      example: "1234567890"
     amount:
       type: object
       description: This is the amount of the transaction.
@@ -413,6 +414,15 @@ components:
           minimum: 3
           maximum: 3
           example: "EUR" 
+    systemTransactionReference:
+      required: 
+        - systemTransactionReference
+      type: string
+      example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
+      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+      minimum: 36
+      maximum: 36  
+      description: This is the unique transaction reference returned by Pxp Financial          
     shopperId:
       type: object 
       required:
@@ -501,52 +511,6 @@ components:
           format: email
           description: This is the email address of the shopper
           example: "john.doe@pxpfinancial.com"
-    voucherResponse:
-      required:
-        - voucherNumber
-        - state
-        - stateMessage
-        - amount
-        - currency
-        - paymentTypeAmounts
-        - shopper
-      properties:
-        voucherNumber: 
-            $ref: "#/components/schemas/voucherNumber"
-            description: "This is the result of the Voucher Creation"
-            example: "Created"
-        state: 
-            type: string
-            enum:
-              - Created
-              - Paid
-              - Expired
-            example: "Created"
-        stateMessage:
-          type: string
-          example: "Voucher Created"
-          description: "This is the result message of the Voucher Creation"          
-        amount: 
-          $ref: "#/components/schemas/amount"
-        paymentTypeAmounts:
-          $ref: "#/components/schemas/paymentTypeAmounts"                    
-        shopper:
-          $ref: "#/components/schemas/shopper"
-    createVoucherResponse:
-      required:
-        - state
-        - stateMessage
-      properties:
-        state:
-          type: string
-          example: "created"
-          enum:
-            - created
-          description: "This is the result of the Voucher Creation"
-        stateMessage:
-          type: string
-          example: "Voucher Created"
-          description: "This is the result message of the Voucher Creation"
     transactionResponse:
       required:
         - systemTransactionReference
@@ -570,6 +534,30 @@ components:
           type: string
           example: "Approved"
           description: This is the result message of the transaction
+    transactionStateMessage:
+      required:
+        - state
+      type: string
+      example: approved
+      description: This is the state of the transaction          
+    withdrawalResponse:
+      required:
+        - systemTransactionReference
+        - state
+        - stateMessage
+      properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"
+        state:
+          required:
+            - pending
+          type: string
+          enum:
+            - pending
+          example: pending
+          description: This is the state of the transaction  
+        stateMessage:
+          $ref: "#/components/schemas/transactionStateMessage"
     merchants:
       required:
         - id

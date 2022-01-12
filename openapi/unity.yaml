@@ -156,7 +156,7 @@ paths:
               type: object 
               properties:
                 paymentTypeAmounts:
-                  oneOf:
+                  anyOf:
                     - $ref: "#/components/schemas/cash"
                     - $ref: "#/components/schemas/chip"
                     - $ref: "#/components/schemas/cheque"

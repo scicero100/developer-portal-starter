@@ -70,12 +70,6 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: 
-                 - ["'$.site' - The site field is required"]
   /transactions/moto/authorisations:
     servers:
       - url: https://qa-pxp-transactions-api.azurewebsites.net/api/v1 
@@ -137,11 +131,6 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"                
   /transactions/pos/authorisations:
     servers:
       - url: https://qa-pxp-transactions-api.azurewebsites.net/api/v1 
@@ -203,11 +192,6 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"
-              example:
-                errorCode: "INVALID_REQUEST"
-                errorReason: "One or more validation errors occurred"
-                correlationId: "cb31c0a0-9c7a-4db7-b420-f51e533ef354"
-                details: "['$.site' - The site field is required]"                                
   /transactions/{systemTransactionReference}/incrementals:
     servers:
       - url: https://qa-pxp-transactions-api.azurewebsites.net/api/v1  

@@ -887,13 +887,13 @@ components:
           items: {}
     errorCode:
       type: string
-      description: "This is the error code return for the operation"
+      description: "This is the error code returned for the operation"
       example: "INVALID_REQUEST"
       required:
         - errorCode
     errorReason:
       type: string
-      description: "This is the error reason return for the operation"
+      description: "This is the error reason returned for the operation"
       example: "One or more validation errors occurred."
       required:
         - errorReason

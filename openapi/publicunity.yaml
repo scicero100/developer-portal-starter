@@ -491,11 +491,10 @@ paths:
                         - Capture
                         - Cancellation
                         - Refund
-                        - CageDeposit
-                        - CageWithdrawals
+                        - Withdrawals
                         - Chargeback
                         - SecondChargeback
-                      example: CageDeposit
+                      example: Withdrawals
                     code:
                       type: string
                       enum:

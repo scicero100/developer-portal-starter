@@ -465,11 +465,11 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"
-  /transactions/Notifications:
+  /MerchantTransactionNotifications:
     post:
       servers:
         - url: https://merchantEndpoint    
-      summary: Send Transaction Notification
+      summary: Send Merchant Transaction Notification
       operationId: transactionNotification
       tags:
         - Notifications   
@@ -491,26 +491,24 @@ paths:
                         - Capture
                         - Cancellation
                         - Refund
-                        - Withdrawals
+                        - CageDeposit
+                        - CageWithdrawals
                         - Chargeback
                         - SecondChargeback
+                      example: CageDeposit
                     code:
                       type: string
                       enum:
-                        - Pending
-                        - Executed
+                        - Cancelled
                         - Declined
                         - Error
+                        - Expired
+                        - Executed
+                        - Pending
+                      example: Pending
                     date:
                       type: string
                       example: "2021-06-28T18:03:50+01:00"
-                    paymentMethod:
-                      type: string
-                      enum:
-                        - Card
-                        - Ideal
-                        - ApplePay
-                        - Cage
                 merchant:
                   $ref: "#/components/schemas/merchant"
                 site:
@@ -519,6 +517,14 @@ paths:
                   $ref: "#/components/schemas/systemTransactionReference"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
+                paymentMethod:
+                  type: string
+                  enum:
+                    - Card
+                    - Ideal
+                    - ApplePay
+                    - Cage
+                  example: Cage
                 amount:
                   $ref: "#/components/schemas/amount"
       responses:

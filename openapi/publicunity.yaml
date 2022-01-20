@@ -465,7 +465,7 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"
-  /transactions/notifications:
+  /transactions/Notifications:
     post:
       servers:
         - url: https://merchantEndpoint    
@@ -483,15 +483,34 @@ paths:
                 event:
                   type: object
                   properties:
+                    type:
+                      type: string
+                      enum:
+                        - Authorisation
+                        - Increment
+                        - Capture
+                        - Cancellation
+                        - Refund
+                        - Withdrawals
+                        - Chargeback
+                        - SecondChargeback
                     code:
                       type: string
                       enum:
-                        - approved
-                        - authorised
-                        - error
+                        - Pending
+                        - Executed
+                        - Declined
+                        - Error
                     date:
                       type: string
                       example: "2021-06-28T18:03:50+01:00"
+                    paymentMethod:
+                      type: string
+                      enum:
+                        - Card
+                        - Ideal
+                        - ApplePay
+                        - Cage
                 merchant:
                   $ref: "#/components/schemas/merchant"
                 site:

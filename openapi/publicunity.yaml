@@ -37,7 +37,9 @@ paths:
                     - $ref: "#/components/schemas/ideal"
                     - $ref: "#/components/schemas/applepay"
                 authorisationType:
-                  $ref: "#/components/schemas/authorisationType" 
+                  $ref: "#/components/schemas/authorisationType"
+                ecom:
+                  $ref: "#/components/schemas/ecom"
                 amount:
                   $ref: "#/components/schemas/amount"                  
                 shopper:
@@ -1382,15 +1384,11 @@ components:
               $ref: "#/components/schemas/addressVerification"
     ecom:
       type: object
-      description: "Required if paymentMethod is of type 'card'" 
       properties:
-        ecom:
-          type: object
-          properties:
-            addressVerification:
-              $ref: "#/components/schemas/addressVerification"    
-            threeDSecure:
-              $ref: "#/components/schemas/threeDSecure"
+        addressVerification:
+          $ref: "#/components/schemas/addressVerification"    
+        threeDSecure:
+          $ref: "#/components/schemas/threeDSecure"
     addressVerification:
       required:
         - houseNumberOrName

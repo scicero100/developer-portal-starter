@@ -38,10 +38,12 @@ paths:
                     - $ref: "#/components/schemas/applepay"
                 authorisationType:
                   $ref: "#/components/schemas/authorisationType"
-                ecom:
-                  $ref: "#/components/schemas/ecom"
                 amount:
-                  $ref: "#/components/schemas/amount"                  
+                  $ref: "#/components/schemas/amount"                     
+                addressVerification:
+                  $ref: "#/components/schemas/addressVerification"
+                threeDSecure:
+                  $ref: "#/components/schemas/threeDSecure"
                 shopper:
                   $ref: "#/components/schemas/shopper"
       responses:
@@ -102,7 +104,9 @@ paths:
                 authorisationType:
                   $ref: "#/components/schemas/authorisationType" 
                 amount:
-                  $ref: "#/components/schemas/amount"                  
+                  $ref: "#/components/schemas/amount"                   
+                addressVerification:
+                  $ref: "#/components/schemas/addressVerification" 
                 shopper:
                   $ref: "#/components/schemas/shopper"
       responses:
@@ -257,6 +261,18 @@ paths:
       operationId: captures
       tags:
         - Modifications
+      requestBody:
+            description: Create an increment
+            required: true      
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    merchantTransactionReference:
+                      $ref: "#/components/schemas/merchantTransactionReference"
+                    amount:
+                      $ref: "#/components/schemas/amount"            
       parameters:
         - name: systemTransactionReference
           in: path
@@ -300,6 +316,18 @@ paths:
       operationId: refunds
       tags:
         - Modifications
+      requestBody:
+            description: Create an increment
+            required: true      
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    merchantTransactionReference:
+                      $ref: "#/components/schemas/merchantTransactionReference"
+                    amount:
+                      $ref: "#/components/schemas/amount"            
       parameters:
         - name: systemTransactionReference
           in: path
@@ -343,6 +371,18 @@ paths:
       operationId: cancels
       tags:
         - Modifications
+      requestBody:
+            description: Create an increment
+            required: true      
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    merchantTransactionReference:
+                      $ref: "#/components/schemas/merchantTransactionReference"
+                    amount:
+                      $ref: "#/components/schemas/amount"            
       parameters:
         - name: systemTransactionReference
           in: path
@@ -1382,18 +1422,7 @@ components:
           properties:
             addressVerification:
               $ref: "#/components/schemas/addressVerification"
-    ecom:
-      type: object
-      properties:
-        addressVerification:
-          $ref: "#/components/schemas/addressVerification"    
-        threeDSecure:
-          $ref: "#/components/schemas/threeDSecure"
     addressVerification:
-      required:
-        - houseNumberOrName
-        - postalCode
-        - country          
       properties:
         houseNumberOrName: 
           type: string
@@ -1410,9 +1439,6 @@ components:
           example: "GB"
           description: "The two-character country code as defined in ISO-3166-1 alpha-2"   
     threeDSecure:
-      required:
-        - status
-        - threeDSecureVersion
       properties:
         status: 
           type: string

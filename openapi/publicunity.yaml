@@ -522,34 +522,19 @@ paths:
           application/json:
             schema:
               properties:
-                event:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                        - Authorisation
-                        - Increment
-                        - Capture
-                        - Cancellation
-                        - Refund
-                        - Withdrawals
-                        - Chargeback
-                        - SecondChargeback
-                      example: Withdrawals
-                    code:
-                      type: string
-                      enum:
-                        - Cancelled
-                        - Declined
-                        - Error
-                        - Expired
-                        - Executed
-                        - Pending
-                      example: Pending
-                    date:
-                      type: string
-                      example: "2021-06-28T18:03:50+01:00"
+                eventCode:
+                  type: string
+                  enum:
+                    - Cancelled
+                    - Declined
+                    - Error
+                    - Expired
+                    - Executed
+                    - Pending
+                  example: Pending
+                eventDate:
+                  type: string
+                  example: "2021-06-28T18:03:50+01:00"
                 merchant:
                   $ref: "#/components/schemas/merchant"
                 site:
@@ -558,6 +543,18 @@ paths:
                   $ref: "#/components/schemas/systemTransactionReference"
                 merchantTransactionReference:
                   $ref: "#/components/schemas/merchantTransactionReference"
+                paymentDirection:
+                  type: string
+                  enum:
+                    - Authorisation
+                    - Increment
+                    - Capture
+                    - Cancellation
+                    - Refund
+                    - Withdrawal
+                    - Chargeback
+                    - SecondChargeback
+                  example: Authorisation
                 paymentMethod:
                   type: string
                   enum:
@@ -565,7 +562,15 @@ paths:
                     - Ideal
                     - ApplePay
                     - Cage
-                  example: Cage
+                  example: Card
+                paymentSource:
+                  type: string
+                  enum:
+                    - Moto
+                    - Ecom
+                    - Pos
+                    - Cage
+                  example: Ecom
                 amount:
                   $ref: "#/components/schemas/amount"
       responses:

@@ -69,7 +69,7 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"                         
-  /deposits/{systemTransactionReference}/details:
+  /deposits/site/{site}:
     servers:
       - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1
     get:
@@ -78,16 +78,18 @@ paths:
       tags:
         - Cage Transactions
       parameters:
-        - name: systemTransactionReference
-          in: path
+        - in: path
+          name: site
           description: This is the unique transaction reference returned by Pxp Financial
           required: true
           schema:
-            type: string
-            minimum: 36
-            maximum: 36
-            example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
-            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            $ref: "#/components/schemas/site"
+        - in: query
+          name: merchantTransactionReference
+          required: false
+          description: The merchantTransactionReference is used to uniquely identify a transaction. This Id is used in all communication with you about the transaction status. There must be a unique value per transaction      
+          schema:
+            $ref: "#/components/schemas/merchantTransactionReference"
       responses:
         200:
           description: Cage Deposit Transaction Details Response
@@ -191,9 +193,6 @@ paths:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08                        
-                      
-                  
-                  
   /withdrawals:
     post:
       summary: Create a Cage Withdrawal
@@ -313,7 +312,7 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"                 
-  /withdrawals/{systemTransactionReference}/details:
+  /withdrawals/site/{site}:
     servers:
       - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1
     get:
@@ -322,23 +321,25 @@ paths:
       tags:
         - Cage Transactions
       parameters:
-        - name: systemTransactionReference
-          in: path
+        - in: path
+          name: site
           description: This is the unique transaction reference returned by Pxp Financial
           required: true
           schema:
-            type: string
-            minimum: 36
-            maximum: 36
-            example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
-            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            $ref: "#/components/schemas/site"
+        - in: query
+          name: merchantTransactionReference
+          required: false
+          description: The merchantTransactionReference is used to uniquely identify a transaction. This Id is used in all communication with you about the transaction status. There must be a unique value per transaction      
+          schema:
+            $ref: "#/components/schemas/merchantTransactionReference"
       responses:
         200:
           description: Cage Withdrawal Transaction Details Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/cageWithdrawalTransactionDetailsResponse"   
+                $ref: "#/components/schemas/cageWithdrawalTransactionDetailsResponse"   
               examples:
                 Pending:
                   value:
@@ -771,7 +772,26 @@ components:
         - state
       type: string
       example: approved
-      description: This is the state of the transaction          
+      description: This is the state of the transaction 
+    cageDepositState:
+      type: string
+      example: "Executed"
+      description: This is the result of the transaction
+      enum:
+        - Pending
+        - Error
+        - Executed
+        - Declined
+        - Cancelled
+    cageWithdrawalState:
+      type: string
+      example: "Executed"
+      description: This is the result of the transaction
+      enum:
+        - Pending
+        - Expired
+        - Executed
+        - Cancelled        
     withdrawalResponse:
       required:
         - systemTransactionReference
@@ -795,30 +815,30 @@ components:
         - amount
         - shopper
         - paymentTypeAmounts
-      properties:
-        state:
-          type: string
-          description: This is the state of the transaction  
-          example: Executed
-        stateMessage:
-          type: string
-          description: This is the state of the transaction  
-          example: ""
-        site:
-          $ref: "#/components/schemas/site"
-        merchantTransactionReference:
-          $ref: "#/components/schemas/merchantTransactionReference"          
-        amount:
-          $ref: "#/components/schemas/amount"
-        shopper:
-          $ref: "#/components/schemas/shopper"
-        paymentTypeAmounts:
-          description: "This is a collection of payment type amounts used that equal the amount"                
-          anyOf:
-            - $ref: "#/components/schemas/cash"
-            - $ref: "#/components/schemas/chip"
-            - $ref: "#/components/schemas/cheque"
-            - $ref: "#/components/schemas/other"
+      type: array
+      items:             
+        properties:
+          state:
+            $ref: "#/components/schemas/cageDepositState"
+          stateMessage:
+            type: string
+            description: This is the state of the transaction  
+            example: ""
+          site:
+            $ref: "#/components/schemas/site"
+          merchantTransactionReference:
+            $ref: "#/components/schemas/merchantTransactionReference"          
+          amount:
+            $ref: "#/components/schemas/amount"
+          shopper:
+            $ref: "#/components/schemas/shopper"
+          paymentTypeAmounts:
+            description: "This is a collection of payment type amounts used that equal the amount"
+            anyOf:
+              - $ref: "#/components/schemas/cash"
+              - $ref: "#/components/schemas/chip"
+              - $ref: "#/components/schemas/cheque"
+              - $ref: "#/components/schemas/other"
     cageWithdrawalTransactionDetailsResponse:
       required:
         - state
@@ -828,30 +848,30 @@ components:
         - site
         - amount
         - shopper
-      properties:
-        state:
-          type: string
-          description: This is the state of the transaction  
-          example: Executed
-        stateMessage:
-          type: string
-          description: This is the state of the transaction  
-          example: ""
-        site:
-          $ref: "#/components/schemas/site"
-        merchantTransactionReference:
-          $ref: "#/components/schemas/merchantTransactionReference"          
-        amount:
-          $ref: "#/components/schemas/amount"
-        shopper:
-          $ref: "#/components/schemas/shopper"
-        paymentTypeAmounts:
-          description: "This is a collection of payment type amounts used that equal the amount"                
-          anyOf:
-            - $ref: "#/components/schemas/cash"
-            - $ref: "#/components/schemas/chip"
-            - $ref: "#/components/schemas/cheque"
-            - $ref: "#/components/schemas/other"                
+      type: array
+      items:         
+        properties:
+          state:
+            $ref: "#/components/schemas/cageWithdrawalState"
+          stateMessage:
+            type: string
+            description: This is the state of the transaction  
+            example: ""
+          site:
+            $ref: "#/components/schemas/site"
+          merchantTransactionReference:
+            $ref: "#/components/schemas/merchantTransactionReference"          
+          amount:
+            $ref: "#/components/schemas/amount"
+          shopper:
+            $ref: "#/components/schemas/shopper"
+          paymentTypeAmounts:
+            description: "This is a collection of payment type amounts used that equal the amount"          
+            anyOf:
+              - $ref: "#/components/schemas/cash"
+              - $ref: "#/components/schemas/chip"
+              - $ref: "#/components/schemas/cheque"
+              - $ref: "#/components/schemas/other"                
     merchants:
       required:
         - id

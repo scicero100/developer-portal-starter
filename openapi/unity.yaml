@@ -103,8 +103,8 @@ paths:
                     - state: Pending
                       stateMessage: 'Deposit Pending'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -123,8 +123,8 @@ paths:
                     - state: Error
                       stateMessage: 'Deposit Error'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -143,8 +143,8 @@ paths:
                     - state: Executed
                       stateMessage: 'Deposit Executed'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -163,8 +163,8 @@ paths:
                     - state: Declined
                       stateMessage: 'Deposit Declined'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -183,8 +183,8 @@ paths:
                     - state: Cancelled
                       stateMessage: 'Deposit Cancelled'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -351,8 +351,8 @@ paths:
                     - state: Pending
                       stateMessage: Withdrawal Pending
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -367,8 +367,8 @@ paths:
                     - state: Executed
                       stateMessage: 'Withdrawal Executed'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -387,8 +387,8 @@ paths:
                     - state: Expired
                       stateMessage: 'Withdrawal Expired'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
@@ -403,8 +403,8 @@ paths:
                     - state: Cancelled
                       stateMessage: 'Withdrawal Cancelled'
                       site: SITE-0001
-                      merchantTransactionReference: This is my transaction reference
                       systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR

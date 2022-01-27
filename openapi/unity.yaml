@@ -104,6 +104,7 @@ paths:
                       stateMessage: 'Deposit Pending'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -123,6 +124,7 @@ paths:
                       stateMessage: 'Deposit Error'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -142,6 +144,7 @@ paths:
                       stateMessage: 'Deposit Executed'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -161,6 +164,7 @@ paths:
                       stateMessage: 'Deposit Declined'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -169,7 +173,7 @@ paths:
                         firstName: John
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com                      
+                        email: john.doe@pxpfinancial.com
                       paymentTypeAmounts:
                         cash: 10.08
                         chip: 10.08
@@ -180,6 +184,7 @@ paths:
                       stateMessage: 'Deposit Cancelled'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -347,6 +352,7 @@ paths:
                       stateMessage: Withdrawal Pending
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -362,6 +368,7 @@ paths:
                       stateMessage: 'Withdrawal Executed'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -381,6 +388,7 @@ paths:
                       stateMessage: 'Withdrawal Expired'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -396,6 +404,7 @@ paths:
                       stateMessage: 'Withdrawal Cancelled'
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
+                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       amount:
                         value: 30.24
                         currency: EUR
@@ -408,7 +417,7 @@ paths:
                       paymentTypeAmounts:
                         cash: 10.08
                         chip: 10.08
-                        cheque: 10.08                      
+                        cheque: 10.08
   /merchants:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1
@@ -826,6 +835,8 @@ components:
             example: ""
           site:
             $ref: "#/components/schemas/site"
+          systemTransactionReference:
+            $ref: "#/components/schemas/systemTransactionReference"                  
           merchantTransactionReference:
             $ref: "#/components/schemas/merchantTransactionReference"          
           amount:
@@ -859,6 +870,8 @@ components:
             example: ""
           site:
             $ref: "#/components/schemas/site"
+          systemTransactionReference:
+            $ref: "#/components/schemas/systemTransactionReference"                      
           merchantTransactionReference:
             $ref: "#/components/schemas/merchantTransactionReference"          
           amount:

@@ -522,7 +522,7 @@ paths:
           application/json:
             schema:
               properties:
-                eventCode:
+                state:
                   type: string
                   enum:
                     - Cancelled
@@ -531,9 +531,13 @@ paths:
                     - Expired
                     - Executed
                     - Pending
-                  example: Pending
-                eventDate:
+                  example: Executed
+                stateMessage:
                   type: string
+                  example: "Authorisation have been executed."
+                stateDate:
+                  type: string
+                  format: date
                   example: "2021-06-28T18:03:50+01:00"
                 merchant:
                   $ref: "#/components/schemas/merchant"
@@ -549,7 +553,7 @@ paths:
                     - Authorisation
                     - Increment
                     - Capture
-                    - Cancellation
+                    - Cancel
                     - Refund
                     - Withdrawal
                     - Chargeback
@@ -566,10 +570,10 @@ paths:
                 paymentSource:
                   type: string
                   enum:
-                    - Moto
-                    - Ecom
-                    - Pos
                     - Cage
+                    - Ecom
+                    - Moto
+                    - Pos
                   example: Ecom
                 amount:
                   $ref: "#/components/schemas/amount"

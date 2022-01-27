@@ -813,10 +813,10 @@ components:
         - state
       type: string
       enum:
-        - approved
-        - authorised
-        - declined
-        - referred
+        - Approved
+        - Authorised
+        - Declined
+        - Referred
       example: approved
       description: This is the state of the transaction
     transactionStateMessage:
@@ -825,6 +825,38 @@ components:
       type: string
       example: approved
       description: This is the state of the transaction
+    paymentMethod:
+      required:
+        - direction
+        - type
+        - source
+      properties:
+        direction:
+          type: string
+          description: This specifies the direction of the payment
+          enum:
+            - Authorisation
+            - Refund
+            - Increment
+            - Capture
+            - Cancelation
+        type:
+          type: string
+          description: This specifies the type of payment
+          required: 
+            - Card
+            - Applepay
+            - Cage
+          example: "Card" 
+        source:
+          type: string
+          description: This describes the source used to capture the payment
+          required: 
+            - Ecom
+            - Moto
+            - Cage
+            - Instore
+          example: "Ecom" 
     providerState:
       required:
         - state
@@ -1126,6 +1158,7 @@ components:
         - systemTransactionReference
         - state
         - stateMessage
+        - paymentMethod
         - approvalCode
         - cvcResult
         - avsResult
@@ -1136,6 +1169,8 @@ components:
           $ref: "#/components/schemas/transactionState"
         stateMessage:
           $ref: "#/components/schemas/transactionStateMessage"          
+        paymentMethod:
+          $ref: "#/components/schemas/paymentMethod"                    
         authorityCode:
           type: string
           required:

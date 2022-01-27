@@ -260,33 +260,11 @@ paths:
                     systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     state: Pending
                     stateMessage: 'Withdrawal Pending'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com              
                 Error:
                   value:
                     systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     state: Error
                     stateMessage: 'Withdrawl Error'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
         default:
           description: Error
           content:

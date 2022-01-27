@@ -74,7 +74,7 @@ paths:
       - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1
     get:
       summary: Get Transaction Details for a Cage Deposit
-      operationId: getCageTransactionDepositDetails
+      operationId: getCageDepositTransactionDetails
       tags:
         - Cage Transactions
       parameters:

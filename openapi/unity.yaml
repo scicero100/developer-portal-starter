@@ -128,6 +128,7 @@ paths:
                 Pending:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Deposit
                       state: Pending
                       stateMessage: 'Deposit Pending'
                       site: SITE-0001
@@ -148,6 +149,7 @@ paths:
                 Error:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Deposit
                       state: Error
                       stateMessage: 'Deposit Error'
                       site: SITE-0001
@@ -164,10 +166,11 @@ paths:
                         firstName: John
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com                      
+                        email: john.doe@pxpfinancial.com
                 Executed:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Deposit
                       state: Executed
                       stateMessage: 'Deposit Executed'
                       site: SITE-0001
@@ -188,6 +191,7 @@ paths:
                 Declined:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Deposit
                       state: Declined
                       stateMessage: 'Deposit Declined'
                       site: SITE-0001
@@ -208,6 +212,7 @@ paths:
                 Cancelled:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: cancelDeposit
                       state: Cancelled
                       stateMessage: 'Deposit Cancelled'
                       site: SITE-0001
@@ -315,6 +320,7 @@ paths:
                 Pending:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Withdrawal
                       state: Pending
                       stateMessage: Withdrawal Pending
                       site: SITE-0001
@@ -331,6 +337,7 @@ paths:
                 Executed:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Withdrawal
                       state: Executed
                       stateMessage: 'Withdrawal Executed'
                       site: SITE-0001
@@ -351,6 +358,7 @@ paths:
                 Error:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Withdrawal
                       state: Error
                       stateMessage: 'Withdrawal Error'
                       site: SITE-0001
@@ -367,6 +375,7 @@ paths:
                 Expired:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: Withdrawal
                       state: Expired
                       stateMessage: 'Withdrawal Expired'
                       site: SITE-0001
@@ -383,6 +392,7 @@ paths:
                 Cancelled:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: CancelWithdrawal
                       state: Cancelled
                       stateMessage: 'Withdrawal Cancelled'
                       site: SITE-0001

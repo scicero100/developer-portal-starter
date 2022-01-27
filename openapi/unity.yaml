@@ -317,7 +317,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/cageWithdrawalTransactionDetailsResponse"   
               examples:
-                Pending:
+                Withdrawal (Pending):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Withdrawal
@@ -334,7 +334,7 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
-                Executed:
+                Withdrawal (Executed):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Withdrawal
@@ -355,7 +355,7 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com   
-                Error:
+                Withdrawal (Error):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Withdrawal
@@ -372,7 +372,7 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
-                Expired:
+                Withdrawal (Expired):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Withdrawal
@@ -389,10 +389,10 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
-                Cancelled:
+                Withdrawal (Cancelled):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                      type: CancelWithdrawal
+                      type: Withdrawal
                       state: Cancelled
                       stateMessage: 'Withdrawal Cancelled'
                       site: SITE-0001
@@ -404,6 +404,44 @@ paths:
                         cash: 10.08
                         chip: 10.08
                         cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
+                CancelWithdrawal (Executed):
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: CancelWithdrawal
+                      state: Executed
+                      stateMessage: 'Cancel Withdrawal Executed'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com   
+                CancelWithdrawal (Error):
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: CancelWithdrawal
+                      state: Error
+                      stateMessage: 'Cancel Withdrawal Error'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
                       shopper:
                         id: Shopper_01
                         firstName: John

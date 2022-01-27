@@ -369,7 +369,23 @@ paths:
                         firstName: John
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com                      
+                        email: john.doe@pxpfinancial.com   
+                Error:
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      state: Error
+                      stateMessage: 'Withdrawal Error'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
                 Expired:
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
@@ -837,12 +853,13 @@ components:
         - Declined
         - Error
         - Executed
-    cageWithdrawalState:
+    cageWithdrawalPreExecutionState:
       type: string
       example: "Pending"
       description: This is the result of the transaction
       enum:
         - Pending
+        - Error
     cageWithdrawalExecutionState:
       type: string
       example: "Executed"
@@ -851,6 +868,16 @@ components:
         - Executed
         - Expired
         - Cancelled
+    cageWithdrawalState:
+          type: string
+          example: "Executed"
+          description: This is the result of the transaction
+          enum:
+            - Cancelled
+            - Error
+            - Executed
+            - Expired            
+            - Pending
     cageDepositTransactionResponse:
       required:
         - systemTransactionReference
@@ -874,7 +901,7 @@ components:
         systemTransactionReference:
           $ref: "#/components/schemas/systemTransactionReference"                        
         state:
-          $ref: "#/components/schemas/cageWithdrawalState"
+          $ref: "#/components/schemas/cageWithdrawalPreExecutionState"
         stateMessage:
           type: string
           description: This is the state of the transaction  
@@ -955,15 +982,15 @@ components:
             $ref: "#/components/schemas/merchantTransactionReference"          
           amount:
             $ref: "#/components/schemas/amount"
-          shopper:
-            $ref: "#/components/schemas/shopper"
           paymentTypeAmounts:
             description: "This is a collection of payment type amounts used that equal the amount"          
             anyOf:
               - $ref: "#/components/schemas/cash"
               - $ref: "#/components/schemas/chip"
               - $ref: "#/components/schemas/cheque"
-              - $ref: "#/components/schemas/other"                
+              - $ref: "#/components/schemas/other"                            
+          shopper:
+            $ref: "#/components/schemas/shopper"
     merchants:
       required:
         - id

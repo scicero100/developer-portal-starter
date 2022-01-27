@@ -100,99 +100,99 @@ paths:
               examples:
                 Pending:
                   value:
-                    state: Pending
-                    stateMessage: 'Deposit Pending'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08
+                    - state: Pending
+                      stateMessage: 'Deposit Pending'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08
                 Error:
                   value:
-                    state: Error
-                    stateMessage: 'Deposit Error'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                         
+                    - state: Error
+                      stateMessage: 'Deposit Error'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                         
                 Executed:
                   value:
-                    state: Executed
-                    stateMessage: 'Deposit Executed'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                  
+                    - state: Executed
+                      stateMessage: 'Deposit Executed'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                  
                 Declined:
                   value:
-                    state: Declined
-                    stateMessage: 'Deposit Declined'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08
+                    - state: Declined
+                      stateMessage: 'Deposit Declined'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08
                 Cancelled:
                   value:
-                    state: Cancelled
-                    stateMessage: 'Deposit Cancelled'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                        
+                    - state: Cancelled
+                      stateMessage: 'Deposit Cancelled'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
   /withdrawals:
     post:
       summary: Create a Cage Withdrawal
@@ -343,72 +343,72 @@ paths:
               examples:
                 Pending:
                   value:
-                    state: Pending
-                    stateMessage: 'Withdrawal Pending'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com
+                    - state: Pending
+                      stateMessage: Withdrawal Pending
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
                 Executed:
                   value:
-                    state: Executed
-                    stateMessage: 'Withdrawal Executed'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08
+                    - state: Executed
+                      stateMessage: 'Withdrawal Executed'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08
                 Expired:
                   value:
-                    state: Expired
-                    stateMessage: 'Withdrawal Expired'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com
+                    - state: Expired
+                      stateMessage: 'Withdrawal Expired'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
                 Cancelled:
                   value:
-                    state: Cancelled
-                    stateMessage: 'Withdrawal Cancelled'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                      
+                    - state: Cancelled
+                      stateMessage: 'Withdrawal Cancelled'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                      
   /merchants:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1

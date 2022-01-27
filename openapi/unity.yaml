@@ -68,61 +68,16 @@ paths:
                     systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     state: Executed
                     stateMessage: 'Deposit Executed'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                      
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com
                 Error:
                   value:
                     systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     state: Error
                     stateMessage: 'Deposit Error'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                      
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
                 Declined:
                   value:
                     systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     state: Declined
                     stateMessage: 'Deposit Declined'
-                    site: SITE-0001
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08                      
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com
         default:
           description: Error
           content:
@@ -901,11 +856,6 @@ components:
         - systemTransactionReference
         - state
         - stateMessage      
-        - site
-        - merchantTransactionReference
-        - amount
-        - paymentTypeAmounts
-        - shopper
       properties:
         systemTransactionReference:
           $ref: "#/components/schemas/systemTransactionReference"                        
@@ -915,21 +865,6 @@ components:
           type: string
           description: This is the state of the transaction  
           example: ""
-        site:
-          $ref: "#/components/schemas/site"
-        merchantTransactionReference:
-          $ref: "#/components/schemas/merchantTransactionReference"          
-        amount:
-          $ref: "#/components/schemas/amount"
-        paymentTypeAmounts:
-          description: "This is a collection of payment type amounts used that equal the amount"
-          anyOf:
-            - $ref: "#/components/schemas/cash"
-            - $ref: "#/components/schemas/chip"
-            - $ref: "#/components/schemas/cheque"
-            - $ref: "#/components/schemas/other"                    
-        shopper:
-          $ref: "#/components/schemas/shopper"        
     cageWithdrawalTransactionResponse:
       required:
         - systemTransactionReference
@@ -943,7 +878,7 @@ components:
         stateMessage:
           type: string
           description: This is the state of the transaction  
-          example: ""            
+          example: ""
     cageWithdrawalExecutionResponse:
       required:
         - systemTransactionReference

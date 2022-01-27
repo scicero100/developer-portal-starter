@@ -440,10 +440,22 @@ paths:
             application/json:
               schema:
                  $ref: "#/components/schemas/cageWithdrawalExecutionResponse"
-              example:
-                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                state: "Executed"
-                stateMessage: "Withdrawal Executed"
+              examples:
+                Executed:
+                  value:
+                    systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                    state: "Executed"
+                    stateMessage: "Withdrawal Executed"
+                Expired:
+                  value:
+                    systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                    state: "Expired"
+                    stateMessage: "Withdrawal Expired"       
+                Cancelled:
+                  value:
+                    systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                    state: "Cancelled"
+                    stateMessage: "Withdrawal Cancelled"                       
         default:
           description: Error
           content:

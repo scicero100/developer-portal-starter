@@ -130,7 +130,7 @@ paths:
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmount:
+                    paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08                         
@@ -149,7 +149,7 @@ paths:
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmount:
+                    paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08                  
@@ -168,7 +168,7 @@ paths:
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmount:
+                    paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08
@@ -187,7 +187,7 @@ paths:
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmount:
+                    paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08                        
@@ -370,7 +370,7 @@ paths:
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmount:
+                    paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08
@@ -404,7 +404,7 @@ paths:
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com
-                    paymentTypeAmount:
+                    paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
                       cheque: 10.08                      

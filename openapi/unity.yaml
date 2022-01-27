@@ -34,27 +34,27 @@ paths:
                   $ref: "#/components/schemas/merchantTransactionReference"
                 amount:
                   $ref: "#/components/schemas/amount"
-                shopper:
-                  $ref: "#/components/schemas/shopperId"
                 paymentTypeAmounts:
-                  description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"                
+                  description: "This is a collection of payment types used that equal the amount"
                   anyOf:
                     - $ref: "#/components/schemas/cash"
                     - $ref: "#/components/schemas/chip"
                     - $ref: "#/components/schemas/cheque"
-                    - $ref: "#/components/schemas/other"
+                    - $ref: "#/components/schemas/other"                  
+                shopper:
+                  $ref: "#/components/schemas/shopperId"
             example:
               site: SITE-0001
               merchantTransactionReference: This is my transaction reference
               amount:
                 value: 30.24
                 currency: EUR
-              shopper:
-                id: Shopper_01
               paymentTypeAmounts:
                 cash: 10.08
                 chip: 10.08
-                cheque: 10.08                    
+                cheque: 10.08                  
+              shopper:
+                id: Shopper_01
       responses:
         200:
           description: Cage Deposit Response
@@ -65,64 +65,64 @@ paths:
               examples:
                 Executed:
                   value:
+                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     state: Executed
                     stateMessage: 'Deposit Executed'
                     site: SITE-0001
-                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                     merchantTransactionReference: This is my transaction reference
                     amount:
                       value: 30.24
                       currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
                     paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
-                      cheque: 10.08               
-                Error:
-                  value:
-                    state: Error
-                    stateMessage: 'Deposit Error'
-                    site: SITE-0001
-                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
-                    shopper:
-                      id: Shopper_01
-                      firstName: John
-                      lastName: Doe
-                      dateOfBirth: '2022-01-26'
-                      email: john.doe@pxpfinancial.com                      
-                    paymentTypeAmounts:
-                      cash: 10.08
-                      chip: 10.08
-                      cheque: 10.08
-                Declined:
-                  value:
-                    state: Declined
-                    stateMessage: 'Deposit Declined'
-                    site: SITE-0001
-                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                    merchantTransactionReference: This is my transaction reference
-                    amount:
-                      value: 30.24
-                      currency: EUR
+                      cheque: 10.08                      
                     shopper:
                       id: Shopper_01
                       firstName: John
                       lastName: Doe
                       dateOfBirth: '2022-01-26'
                       email: john.doe@pxpfinancial.com
+                Error:
+                  value:
+                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                    state: Error
+                    stateMessage: 'Deposit Error'
+                    site: SITE-0001
+                    merchantTransactionReference: This is my transaction reference
+                    amount:
+                      value: 30.24
+                      currency: EUR
                     paymentTypeAmounts:
                       cash: 10.08
                       chip: 10.08
-                      cheque: 10.08
+                      cheque: 10.08                      
+                    shopper:
+                      id: Shopper_01
+                      firstName: John
+                      lastName: Doe
+                      dateOfBirth: '2022-01-26'
+                      email: john.doe@pxpfinancial.com                      
+                Declined:
+                  value:
+                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                    state: Declined
+                    stateMessage: 'Deposit Declined'
+                    site: SITE-0001
+                    merchantTransactionReference: This is my transaction reference
+                    amount:
+                      value: 30.24
+                      currency: EUR
+                    paymentTypeAmounts:
+                      cash: 10.08
+                      chip: 10.08
+                      cheque: 10.08                      
+                    shopper:
+                      id: Shopper_01
+                      firstName: John
+                      lastName: Doe
+                      dateOfBirth: '2022-01-26'
+                      email: john.doe@pxpfinancial.com
         default:
           description: Error
           content:
@@ -172,104 +172,104 @@ paths:
               examples:
                 Pending:
                   value:
-                    - state: Pending
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      state: Pending
                       stateMessage: 'Deposit Pending'
                       site: SITE-0001
-                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       merchantTransactionReference: This is my transaction reference
                       amount:
                         value: 30.24
                         currency: EUR
-                      shopper:
-                        id: Shopper_01
-                        firstName: John
-                        lastName: Doe
-                        dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com
-                      paymentTypeAmounts:
-                        cash: 10.08
-                        chip: 10.08
-                        cheque: 10.08
-                Error:
-                  value:
-                    - state: Error
-                      stateMessage: 'Deposit Error'
-                      site: SITE-0001
-                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                      merchantTransactionReference: This is my transaction reference
-                      amount:
-                        value: 30.24
-                        currency: EUR
-                      shopper:
-                        id: Shopper_01
-                        firstName: John
-                        lastName: Doe
-                        dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com                      
-                      paymentTypeAmounts:
-                        cash: 10.08
-                        chip: 10.08
-                        cheque: 10.08                         
-                Executed:
-                  value:
-                    - state: Executed
-                      stateMessage: 'Deposit Executed'
-                      site: SITE-0001
-                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                      merchantTransactionReference: This is my transaction reference
-                      amount:
-                        value: 30.24
-                        currency: EUR
-                      shopper:
-                        id: Shopper_01
-                        firstName: John
-                        lastName: Doe
-                        dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com                      
-                      paymentTypeAmounts:
-                        cash: 10.08
-                        chip: 10.08
-                        cheque: 10.08                  
-                Declined:
-                  value:
-                    - state: Declined
-                      stateMessage: 'Deposit Declined'
-                      site: SITE-0001
-                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                      merchantTransactionReference: This is my transaction reference
-                      amount:
-                        value: 30.24
-                        currency: EUR
-                      shopper:
-                        id: Shopper_01
-                        firstName: John
-                        lastName: Doe
-                        dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com
-                      paymentTypeAmounts:
-                        cash: 10.08
-                        chip: 10.08
-                        cheque: 10.08
-                Cancelled:
-                  value:
-                    - state: Cancelled
-                      stateMessage: 'Deposit Cancelled'
-                      site: SITE-0001
-                      systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                      merchantTransactionReference: This is my transaction reference
-                      amount:
-                        value: 30.24
-                        currency: EUR
-                      shopper:
-                        id: Shopper_01
-                        firstName: John
-                        lastName: Doe
-                        dateOfBirth: '2022-01-26'
-                        email: john.doe@pxpfinancial.com                      
                       paymentTypeAmounts:
                         cash: 10.08
                         chip: 10.08
                         cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
+                Error:
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      state: Error
+                      stateMessage: 'Deposit Error'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                Executed:
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      state: Executed
+                      stateMessage: 'Deposit Executed'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                      
+                Declined:
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      state: Declined
+                      stateMessage: 'Deposit Declined'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
+                Cancelled:
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      state: Cancelled
+                      stateMessage: 'Deposit Cancelled'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com
   /withdrawals:
     post:
       summary: Create a Cage Withdrawal
@@ -294,15 +294,44 @@ paths:
                   $ref: "#/components/schemas/shopper"
       responses:
         200:
-          description: Withdrawal Response
+          description: Cage Withdrawal Response
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/withdrawalResponse"
-              example:
-                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                state: "Pending"
-                stateMessage: "Withdrawal Pending"
+                 $ref: "#/components/schemas/cageWithdrawalTransactionResponse"
+              examples:
+                Pending:
+                  value:
+                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                    state: Pending
+                    stateMessage: 'Withdrawal Pending'
+                    site: SITE-0001
+                    merchantTransactionReference: This is my transaction reference
+                    amount:
+                      value: 30.24
+                      currency: EUR
+                    shopper:
+                      id: Shopper_01
+                      firstName: John
+                      lastName: Doe
+                      dateOfBirth: '2022-01-26'
+                      email: john.doe@pxpfinancial.com              
+                Error:
+                  value:
+                    systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                    state: Error
+                    stateMessage: 'Withdrawl Error'
+                    site: SITE-0001
+                    merchantTransactionReference: This is my transaction reference
+                    amount:
+                      value: 30.24
+                      currency: EUR
+                    shopper:
+                      id: Shopper_01
+                      firstName: John
+                      lastName: Doe
+                      dateOfBirth: '2022-01-26'
+                      email: john.doe@pxpfinancial.com                      
         default:
           description: Error
           content:
@@ -437,7 +466,7 @@ paths:
               type: object 
               properties:
                 paymentTypeAmounts:
-                  description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"                
+                  description: "This is a collection of payment types used that equal the amount"
                   anyOf:
                     - $ref: "#/components/schemas/cash"
                     - $ref: "#/components/schemas/chip"
@@ -461,7 +490,7 @@ paths:
           content:
             application/json:
               schema:
-                 $ref: "#/components/schemas/withdrawalResponse"
+                 $ref: "#/components/schemas/cageWithdrawalExecutionResponse"
               example:
                 systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
                 state: "Executed"
@@ -845,55 +874,41 @@ components:
           type: string
           example: "Approved"
           description: This is the result message of the transaction
-    transactionStateMessage:
-      required:
-        - state
-      type: string
-      example: approved
-      description: This is the state of the transaction 
     cageDepositState:
       type: string
       example: "Executed"
       description: This is the result of the transaction
       enum:
-        - Pending
+        - Declined
         - Error
         - Executed
-        - Declined
-        - Cancelled
     cageWithdrawalState:
+      type: string
+      example: "Pending"
+      description: This is the result of the transaction
+      enum:
+        - Pending
+    cageWithdrawalExecutionState:
       type: string
       example: "Executed"
       description: This is the result of the transaction
       enum:
-        - Pending
-        - Expired
         - Executed
-        - Cancelled        
-    withdrawalResponse:
-      required:
-        - systemTransactionReference
-        - state
-        - stateMessage
-      properties:
-        systemTransactionReference:
-          $ref: "#/components/schemas/systemTransactionReference"
-        state:
-          type: string
-          description: This is the state of the transaction  
-        stateMessage:
-          $ref: "#/components/schemas/transactionStateMessage"
+        - Expired
+        - Cancelled
     cageDepositTransactionResponse:
       required:
+        - systemTransactionReference
         - state
         - stateMessage      
-        - systemTransactionReference
-        - merchantTransactionReference
         - site
+        - merchantTransactionReference
         - amount
-        - shopper
         - paymentTypeAmounts
+        - shopper
       properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"                        
         state:
           $ref: "#/components/schemas/cageDepositState"
         stateMessage:
@@ -902,21 +917,47 @@ components:
           example: ""
         site:
           $ref: "#/components/schemas/site"
-        systemTransactionReference:
-          $ref: "#/components/schemas/systemTransactionReference"                  
         merchantTransactionReference:
           $ref: "#/components/schemas/merchantTransactionReference"          
         amount:
           $ref: "#/components/schemas/amount"
-        shopper:
-          $ref: "#/components/schemas/shopper"
         paymentTypeAmounts:
           description: "This is a collection of payment type amounts used that equal the amount"
           anyOf:
             - $ref: "#/components/schemas/cash"
             - $ref: "#/components/schemas/chip"
             - $ref: "#/components/schemas/cheque"
-            - $ref: "#/components/schemas/other"          
+            - $ref: "#/components/schemas/other"                    
+        shopper:
+          $ref: "#/components/schemas/shopper"        
+    cageWithdrawalTransactionResponse:
+      required:
+        - systemTransactionReference
+        - state
+        - stateMessage      
+      properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"                        
+        state:
+          $ref: "#/components/schemas/cageWithdrawalState"
+        stateMessage:
+          type: string
+          description: This is the state of the transaction  
+          example: ""            
+    cageWithdrawalExecutionResponse:
+      required:
+        - systemTransactionReference
+        - state
+        - stateMessage      
+      properties:
+        systemTransactionReference:
+          $ref: "#/components/schemas/systemTransactionReference"                        
+        state:
+          $ref: "#/components/schemas/cageWithdrawalExecutionState"
+        stateMessage:
+          type: string
+          description: This is the state of the transaction  
+          example: ""
     cageDepositTransactionDetailsResponse:
       required:
         - state

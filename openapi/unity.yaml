@@ -125,7 +125,7 @@ paths:
               schema:
                  $ref: "#/components/schemas/cageDepositTransactionDetailsResponse"
               examples:
-                Pending:
+                Deposit (Pending):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Deposit
@@ -146,7 +146,7 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
-                Error:
+                Deposit (Error):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Deposit
@@ -167,7 +167,7 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
-                Executed:
+                Deposit (Executed):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Deposit
@@ -188,7 +188,7 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com                      
-                Declined:
+                Deposit (Declined):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
                       type: Deposit
@@ -209,10 +209,10 @@ paths:
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
-                Cancelled:
+                Deposit (Cancelled):
                   value:
                     - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
-                      type: cancelDeposit
+                      type: Deposit
                       state: Cancelled
                       stateMessage: 'Deposit Cancelled'
                       site: SITE-0001
@@ -229,7 +229,49 @@ paths:
                         firstName: John
                         lastName: Doe
                         dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.co
+                CancelDeposit (Executed):
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: CancelDeposit
+                      state: Executed
+                      stateMessage: 'Cancel Deposit Executed'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
                         email: john.doe@pxpfinancial.com
+                CancelDeposit (Error):
+                  value:
+                    - systemTransactionReference: 1ed768bb-e88a-4636-91ae-67927ccbb02b
+                      type: CancelDeposit
+                      state: Error
+                      stateMessage: 'Cancel Deposit Error'
+                      site: SITE-0001
+                      merchantTransactionReference: This is my transaction reference
+                      amount:
+                        value: 30.24
+                        currency: EUR
+                      paymentTypeAmounts:
+                        cash: 10.08
+                        chip: 10.08
+                        cheque: 10.08                        
+                      shopper:
+                        id: Shopper_01
+                        firstName: John
+                        lastName: Doe
+                        dateOfBirth: '2022-01-26'
+                        email: john.doe@pxpfinancial.com                        
   /withdrawals:
     post:
       summary: Create a Cage Withdrawal

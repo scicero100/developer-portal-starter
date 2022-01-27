@@ -435,7 +435,7 @@ paths:
       description: This is the unique transaction reference returned by Pxp Financial            
       responses:
         200:
-          description: Withdrawal Response
+          description: Cage Withdrawal Execution Response
           content:
             application/json:
               schema:

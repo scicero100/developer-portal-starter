@@ -13,6 +13,8 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
   /deposits:
+    servers:
+      - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1  
     post:
       summary: Create a Cage Deposit
       operationId: createCageDeposit
@@ -69,16 +71,13 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"                         
-  /deposits/site/{site}:
-    servers:
-      - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1
     get:
       summary: Get Transaction Details for a Cage Deposit
       operationId: getCageDepositTransactionDetails
       tags:
         - Cage Transactions
       parameters:
-        - in: path
+        - in: query
           name: site
           description: This is the unique transaction reference returned by Pxp Financial
           required: true
@@ -252,81 +251,13 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"                        
-  /withdrawals/{systemTransactionReference}/executions:
-    post:
-      summary: Execute a Cage Withdrawal
-      operationId: executeCageWithdrawal
-      tags:
-        - Cage Transactions
-      requestBody:
-        description: Execute a Cage Withdrawal
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object 
-              properties:
-                paymentTypeAmounts:
-                  description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"                
-                  anyOf:
-                    - $ref: "#/components/schemas/cash"
-                    - $ref: "#/components/schemas/chip"
-                    - $ref: "#/components/schemas/cheque"
-                    - $ref: "#/components/schemas/other"
-      parameters:
-        - name: systemTransactionReference
-          in: path
-          description: This is the unique transaction reference returned by Pxp Financial
-          required: true
-          schema:
-            type: string
-            minimum: 36
-            maximum: 36
-            example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
-            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-      description: This is the unique transaction reference returned by Pxp Financial            
-      responses:
-        200:
-          description: Withdrawal Response
-          content:
-            application/json:
-              schema:
-                 $ref: "#/components/schemas/withdrawalResponse"
-              example:
-                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
-                state: "Executed"
-                stateMessage: "Withdrawal Executed"
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/error"
-        400:
-          description: Invalid Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errorCode:
-                    $ref: "#/components/schemas/errorCode"
-                  errorReason:
-                    $ref: "#/components/schemas/errorReason"
-                  correlationId:
-                    $ref: "#/components/schemas/correlationId"
-                  details:
-                    $ref: "#/components/schemas/details"                 
-  /withdrawals/site/{site}:
-    servers:
-      - url: https://qa-pxp-cagetransactions-api.azurewebsites.net/api/v1
     get:
       summary: Get Transaction Details for a Cage Withdrawal
       operationId: getCageWithdrawalTransactionDetails
       tags:
         - Cage Transactions
       parameters:
-        - in: path
+        - in: query
           name: site
           description: This is the unique transaction reference returned by Pxp Financial
           required: true
@@ -417,7 +348,72 @@ paths:
                       paymentTypeAmounts:
                         cash: 10.08
                         chip: 10.08
-                        cheque: 10.08
+                        cheque: 10.08                    
+  /withdrawals/{systemTransactionReference}/executions:
+    post:
+      summary: Execute a Cage Withdrawal
+      operationId: executeCageWithdrawal
+      tags:
+        - Cage Transactions
+      requestBody:
+        description: Execute a Cage Withdrawal
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object 
+              properties:
+                paymentTypeAmounts:
+                  description: "This is a collection of payment types used that equal the amount for a cage deposit or withdrawal"                
+                  anyOf:
+                    - $ref: "#/components/schemas/cash"
+                    - $ref: "#/components/schemas/chip"
+                    - $ref: "#/components/schemas/cheque"
+                    - $ref: "#/components/schemas/other"
+      parameters:
+        - name: systemTransactionReference
+          in: path
+          description: This is the unique transaction reference returned by Pxp Financial
+          required: true
+          schema:
+            type: string
+            minimum: 36
+            maximum: 36
+            example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+      description: This is the unique transaction reference returned by Pxp Financial            
+      responses:
+        200:
+          description: Withdrawal Response
+          content:
+            application/json:
+              schema:
+                 $ref: "#/components/schemas/withdrawalResponse"
+              example:
+                systemTransactionReference: "1ed768bb-e88a-4636-91ae-67927ccbb02b"
+                state: "Executed"
+                stateMessage: "Withdrawal Executed"
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+        400:
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    $ref: "#/components/schemas/errorCode"
+                  errorReason:
+                    $ref: "#/components/schemas/errorReason"
+                  correlationId:
+                    $ref: "#/components/schemas/correlationId"
+                  details:
+                    $ref: "#/components/schemas/details"                 
   /merchants:
     servers:
       - url: https://qa-pxp-onboarding-api.azurewebsites.net/api/v1

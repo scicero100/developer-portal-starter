@@ -812,29 +812,6 @@ components:
           format: email
           description: This is the email address of the shopper
           example: "john.doe@pxpfinancial.com"
-    transactionResponse:
-      required:
-        - systemTransactionReference
-        - state
-        - stateMessage
-      properties:
-        systemTransactionReference:
-          type: string
-          example: 1ed768bb-e88a-4636-91ae-67927ccbb02b                    
-          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-          minimum: 36
-          maximum: 36  
-          description: This is the unique transaction reference returned by Pxp Financial
-        state:
-          type: string
-          example: "Approved"
-          description: This is the result of the transaction
-          enum:
-            - Approved
-        stateMessage:
-          type: string
-          example: "Approved"
-          description: This is the result message of the transaction
     cageDepositState:
       type: string
       example: "Executed"
@@ -859,20 +836,20 @@ components:
         - Expired
         - Cancelled
     cageWithdrawalState:
-          type: string
-          example: "Executed"
-          description: This is the result of the transaction
-          enum:
-            - Cancelled
-            - Error
-            - Executed
-            - Expired            
-            - Pending
+      type: string
+      example: "Executed"
+      description: This is the result of the transaction
+      enum:
+        - Cancelled
+        - Error
+        - Executed
+        - Expired            
+        - Pending
     cageDepositTransactionResponse:
       required:
         - systemTransactionReference
         - state
-        - stateMessage      
+        - stateMessage
       properties:
         systemTransactionReference:
           $ref: "#/components/schemas/systemTransactionReference"                        
@@ -926,7 +903,15 @@ components:
           systemTransactionReference:
             $ref: "#/components/schemas/systemTransactionReference"                          
           state:
-            $ref: "#/components/schemas/cageDepositState"
+            type: string
+            example: "Executed"
+            description: This is the result of the transaction
+            enum:
+              - Pending
+              - Error
+              - Executed
+              - Declined
+              - Cancelled            
           stateMessage:
             type: string
             description: This is the state of the transaction  

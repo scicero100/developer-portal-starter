@@ -131,6 +131,7 @@ paths:
                       type: Deposit
                       state: Pending
                       stateMessage: 'Deposit Pending'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -152,6 +153,7 @@ paths:
                       type: Deposit
                       state: Error
                       stateMessage: 'Deposit Error'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -173,6 +175,7 @@ paths:
                       type: Deposit
                       state: Executed
                       stateMessage: 'Deposit Executed'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -194,6 +197,7 @@ paths:
                       type: Deposit
                       state: Declined
                       stateMessage: 'Deposit Declined'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -215,6 +219,7 @@ paths:
                       type: Deposit
                       state: Cancelled
                       stateMessage: 'Deposit Cancelled'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -236,6 +241,7 @@ paths:
                       type: CancelDeposit
                       state: Executed
                       stateMessage: 'Cancel Deposit Executed'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -257,6 +263,7 @@ paths:
                       type: CancelDeposit
                       state: Error
                       stateMessage: 'Cancel Deposit Error'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -365,6 +372,7 @@ paths:
                       type: Withdrawal
                       state: Pending
                       stateMessage: Withdrawal Pending
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -382,6 +390,7 @@ paths:
                       type: Withdrawal
                       state: Executed
                       stateMessage: 'Withdrawal Executed'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -403,6 +412,7 @@ paths:
                       type: Withdrawal
                       state: Error
                       stateMessage: 'Withdrawal Error'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -420,6 +430,7 @@ paths:
                       type: Withdrawal
                       state: Expired
                       stateMessage: 'Withdrawal Expired'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -437,6 +448,7 @@ paths:
                       type: Withdrawal
                       state: Cancelled
                       stateMessage: 'Withdrawal Cancelled'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -458,6 +470,7 @@ paths:
                       type: CancelWithdrawal
                       state: Executed
                       stateMessage: 'Cancel Withdrawal Executed'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -479,6 +492,7 @@ paths:
                       type: CancelWithdrawal
                       state: Error
                       stateMessage: 'Cancel Withdrawal Error'
+                      merchant: MERC-0001
                       site: SITE-0001
                       merchantTransactionReference: This is my transaction reference
                       amount:
@@ -752,6 +766,13 @@ paths:
                    $ref: "#/components/schemas/languages"                   
 components:
   schemas:
+    merchant:
+      required: 
+        - merchant
+      type: string
+      description: The unique merchant identifier, with which you want to process the transaction. This can be for example a store, hotel, a website etc. This value is generated by PXP Financial
+      example: "MERC-0001"
+      maximum: 20  
     site:
       required: 
         - site
@@ -982,6 +1003,7 @@ components:
         - systemTransactionReference
         - state
         - stateMessage      
+        - merchant
         - site
         - merchantTransactionReference
         - amount
@@ -1006,6 +1028,8 @@ components:
             type: string
             description: This is the state of the transaction  
             example: ""
+          merchant:
+            $ref: "#/components/schemas/merchant"            
           site:
             $ref: "#/components/schemas/site"
           merchantTransactionReference:
@@ -1025,7 +1049,8 @@ components:
       required:
         - systemTransactionReference
         - state
-        - stateMessage      
+        - stateMessage
+        - merchant
         - site
         - merchantTransactionReference
         - amount
@@ -1041,6 +1066,8 @@ components:
             type: string
             description: This is the state of the transaction  
             example: ""
+          merchant:
+            $ref: "#/components/schemas/merchant"            
           site:
             $ref: "#/components/schemas/site"
           merchantTransactionReference:

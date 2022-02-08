@@ -418,7 +418,7 @@ paths:
                     $ref: "#/components/schemas/correlationId"
                   details:
                     $ref: "#/components/schemas/details"
-  /transactions/cage/depositDetails:
+  /transactions/cage/deposit/creationData:
     servers:
       - url: https://merchantEndpoint
     get:
